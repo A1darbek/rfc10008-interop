@@ -2,22 +2,22 @@
 
 Generated from `receipts/**/receipt.json`.
 
-| Profile | Row | query-suite-example-live |
-|---|---|---:|
-| Core | Native QUERY with JSON body | PASS |
-| Core | Supported Content-Type accepted | PASS |
-| Core | Unsupported Content-Type rejected | PASS |
-| Core | Missing Content-Type handled | OBSERVED |
-| Core | Accept-Query advertised | PASS |
-| Core | POST method override | PASS |
-| Core | Identical request repeatability | PASS |
-| Representation | ETag advertised | PASS |
-| Representation | Conditional revalidation -> 304 | PASS |
-| Representation | Content-Location advertised | PASS |
-| Representation | Validator strength | OBSERVED |
-| Representation | Accept-Encoding: identity probe | OBSERVED |
-| Semantic identity | Equivalent JSON -> same identity | NOT_SUPPORTED |
-| Safety | No unintended side effects | OBSERVED |
-| Ayder safety | No committed-offset advance | NOT_APPLICABLE |
-| Ayder safety | No broker-state mutation | NOT_APPLICABLE |
-| Ayder safety | Bounded snapshot stability | NOT_APPLICABLE |
+| Profile | Row | ayder-local | query-suite-example-live |
+|---|---|---:|---:|
+| Core | Native QUERY with JSON body | PASS | PASS |
+| Core | Supported Content-Type accepted | PASS | PASS |
+| Core | Unsupported Content-Type rejected | PASS | PASS |
+| Core | Missing Content-Type handled | OBSERVED | OBSERVED |
+| Core | Accept-Query advertised | PASS | PASS |
+| Core | POST method override | NOT_APPLICABLE | PASS |
+| Core | Identical request repeatability | PASS | PASS |
+| Representation | ETag advertised | PASS | PASS |
+| Representation | Conditional revalidation -> 304 | PASS | PASS |
+| Representation | Content-Location advertised | PASS | PASS |
+| Representation | Validator strength | OBSERVED | OBSERVED |
+| Representation | Accept-Encoding: identity probe | OBSERVED | OBSERVED |
+| Semantic identity | Equivalent JSON -> same identity | PASS | NOT_SUPPORTED |
+| Safety | No unintended side effects | OBSERVED | OBSERVED |
+| Ayder safety | No committed-offset advance | PASS | NOT_APPLICABLE |
+| Ayder safety | No broker-state mutation | PASS | NOT_APPLICABLE |
+| Ayder safety | Bounded snapshot stability | PASS | NOT_APPLICABLE |
