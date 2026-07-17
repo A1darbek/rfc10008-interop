@@ -1,0 +1,21 @@
+name: live-interop
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 3 * * *'
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run query-suite-example live target
+        run: python3 runner/run.py --target targets/query-suite-example/target.json --output receipts/query-suite-example
+      - name: Render matrix
+        run: python3 runner/render_matrix.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rfc10008-live-receipts
+          path: |
+            receipts/**/receipt.json
+            receipts/**/receipt.txt
+            MATRIX.generated.md

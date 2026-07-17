@@ -1,0 +1,23 @@
+{
+  "schema_version": "0.1",
+  "id": "query-suite-example-live",
+  "name": "query-suite-example",
+  "implementation_url": "https://github.com/DanMat/query-suite-example",
+  "implementation_commit": "10a0e1648df58d14adfd24492b66af8e98873a7d",
+  "endpoint": "https://query-suite-example.danmat.workers.dev/stocks/search",
+  "method": "QUERY",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "request_body_file": "targets/query-suite-example/request.json",
+  "equivalent_request_body_file": "targets/query-suite-example/request-equivalent.json",
+  "capabilities": {
+    "method_override": true,
+    "semantic_query_identity": false,
+    "implementation_safety_receipt": false
+  },
+  "environment": {
+    "transport": "https",
+    "cdn": "cloudflare"
+  }
+}

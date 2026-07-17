@@ -1,0 +1,24 @@
+{
+  "schema_version": "0.1",
+  "id": "ayder-local",
+  "name": "Ayder",
+  "implementation_url": "https://github.com/A1darbek/ayder",
+  "endpoint": "http://localhost:1109/broker/query",
+  "method": "QUERY",
+  "headers": {
+    "Authorization": "Bearer dev",
+    "Content-Type": "application/json"
+  },
+  "request_body_file": "targets/ayder/request.json",
+  "equivalent_request_body_file": "targets/ayder/request-equivalent.json",
+  "capabilities": {
+    "method_override": false,
+    "semantic_query_identity": true,
+    "implementation_safety_receipt": true
+  },
+  "setup": {
+    "kind": "ayder_payment_recovery",
+    "topic": "payment-recovery",
+    "group": "payment-worker"
+  }
+}
