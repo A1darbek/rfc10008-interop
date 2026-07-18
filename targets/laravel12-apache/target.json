@@ -1,0 +1,32 @@
+{
+  "schema_version": "0.2",
+  "id": "laravel12-apache-generic",
+  "name": "Laravel 12 through Apache",
+  "implementation_url": "https://github.com/phoenix1331/laravel-http-query-demo",
+  "implementation_commit": "c9a2c8b325bad46f87aa7e065046afa1de5aafd5",
+  "endpoint": "http://localhost:8080/mock/orders",
+  "method": "QUERY",
+  "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  },
+  "request_body_file": "targets/laravel12-apache/request.json",
+  "equivalent_request_body_file": "targets/laravel12-apache/request-equivalent.json",
+  "capabilities": {
+    "accept_query": false,
+    "etag": false,
+    "conditional_revalidation": false,
+    "content_location": false,
+    "semantic_query_identity": false,
+    "method_override": false,
+    "cors_preflight": false,
+    "cache_observability": false,
+    "implementation_safety_receipt": false
+  },
+  "expectations": {
+    "native_query_status": 200,
+    "supported_content_type_status": 200,
+    "unsupported_content_type_mode": "observe",
+    "missing_content_type_mode": "observe"
+  }
+}

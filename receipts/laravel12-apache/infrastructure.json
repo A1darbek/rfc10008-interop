@@ -1,0 +1,74 @@
+{
+  "endpoint": "http://localhost:8080/mock/orders",
+  "rows": [
+    {
+      "evidence": {
+        "status": 200,
+        "verb_received": "QUERY"
+      },
+      "id": "laravel12.apache_query_reaches_application",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "filter_applied": "shipped",
+        "result_statuses": [
+          "shipped"
+        ]
+      },
+      "id": "laravel12.json_body_preserved",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "status": 200
+      },
+      "id": "laravel12.generic_route_dispatch",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "reason": "Laravel 12 target registers QUERY directly on the underlying router"
+      },
+      "id": "laravel12.native_route_helper",
+      "result": "NOT_APPLICABLE"
+    },
+    {
+      "evidence": {
+        "reason": "Laravel 12 target uses generic Http::send(\"QUERY\") path"
+      },
+      "id": "laravel12.native_http_client_helper",
+      "result": "NOT_APPLICABLE"
+    },
+    {
+      "evidence": {
+        "access_control_allow_methods": "",
+        "status": 200
+      },
+      "id": "laravel12.cors_preflight_allows_query",
+      "result": "OBSERVED"
+    },
+    {
+      "evidence": {
+        "known_future_support": {
+          "php_src_pr": 22615,
+          "php_version": "8.6"
+        },
+        "php_version": "PHP 8.2.32 (cli) (built: Jul 14 2026 01:36:12) (NTS)",
+        "server": "apache"
+      },
+      "id": "laravel12.php_cli_server_behavior",
+      "result": "OBSERVED"
+    }
+  ],
+  "schema_version": "0.1",
+  "summary": {
+    "fail": 0,
+    "not_applicable": 2,
+    "not_supported": 0,
+    "observed": 2,
+    "pass": 3,
+    "unverified": 0
+  },
+  "target": "laravel12-apache-generic"
+}
