@@ -3,10 +3,10 @@
 ============================================================
  target       : ayder-local
  endpoint     : http://localhost:1109/broker/query
- generated_at : 2026-07-18T21:04:19Z
- runner       : 7e740e5db93c9c06b1b0adba86ded31bada7a6c9
+ generated_at : 2026-07-18T21:07:32Z
+ runner       : c21660d28de7dd5d6cbfb5109f93f5bf930f1d76
 ------------------------------------------------------------
- summary      : PASS=13 FAIL=0 OBSERVED=5 UNVERIFIED=0 NOT_SUPPORTED=1 NOT_APPLICABLE=1
+ summary      : PASS=13 FAIL=0 OBSERVED=5 UNVERIFIED=0 NOT_SUPPORTED=2 NOT_APPLICABLE=0
 ------------------------------------------------------------
  PASS            core.native_query
    expected=200 observed=200
@@ -38,7 +38,8 @@
    evidence={"body_sha256": "2c5f1afa38152c087052ffe7eb9003549010c0b3e7bca5380c19b081634db8c5", "etag": "\"ayder-query-sha256-753694fb60975885eb5d75c976162fd0e27f4ab3b535ecf0e300a084a8a47411\"", "strength": "strong"}
  PASS            semantic.equivalent_json_same_identity
    evidence={"equivalent_etag": "\"ayder-query-sha256-753694fb60975885eb5d75c976162fd0e27f4ab3b535ecf0e300a084a8a47411\"", "equivalent_fingerprint": "sha256:753694fb60975885eb5d75c976162fd0e27f4ab3b535ecf0e300a084a8a47411", "first_etag": "\"ayder-query-sha256-753694fb60975885eb5d75c976162fd0e27f4ab3b535ecf0e300
- NOT_APPLICABLE  core.method_override
+ NOT_SUPPORTED   core.method_override
+   evidence={"reason": "target does not declare method_override"}
  OBSERVED        safety.no_unintended_side_effects
    evidence={"first_body_sha256": "2c5f1afa38152c087052ffe7eb9003549010c0b3e7bca5380c19b081634db8c5", "repeat_body_sha256": "2c5f1afa38152c087052ffe7eb9003549010c0b3e7bca5380c19b081634db8c5", "repeat_status": 200}
  OBSERVED        safety.state_before_after_recorded
@@ -50,5 +51,5 @@
  PASS            ayder.bounded_snapshot_stability
    evidence={"broker_state_mutated": false, "commits_mutated": false, "from_offset": 0, "messages_matched": 2, "messages_scanned": 3, "partition": 0, "plan": "bounded_partition_scan", "segments_read": 1, "to_offset": 3, "topic": "payment-recovery"}
  PASS            ayder.rate_limit_headers_sane
-   evidence={"limit": 5000, "remaining": 4999, "reset": 1784408660}
+   evidence={"limit": 5000, "remaining": 4999, "reset": 1784408853}
 ============================================================

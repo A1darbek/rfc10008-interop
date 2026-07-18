@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.1",
+  "schema_version": "0.2",
   "id": "ayder-local",
   "name": "Ayder",
   "implementation_url": "https://github.com/A1darbek/ayder",
@@ -13,10 +13,21 @@
   "request_body_file": "targets/ayder/request.json",
   "equivalent_request_body_file": "targets/ayder/request-equivalent.json",
   "capabilities": {
+    "accept_query": true,
+    "etag": true,
+    "conditional_revalidation": true,
     "content_location": false,
     "method_override": false,
     "semantic_query_identity": true,
+    "cors_preflight": false,
+    "cache_observability": false,
     "implementation_safety_receipt": true
+  },
+  "expectations": {
+    "native_query_status": 200,
+    "supported_content_type_status": 200,
+    "unsupported_content_type_status": 415,
+    "missing_content_type_mode": "observe"
   },
   "setup": {
     "kind": "ayder_payment_recovery",

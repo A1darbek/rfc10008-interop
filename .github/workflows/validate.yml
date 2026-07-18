@@ -13,6 +13,8 @@ jobs:
           python-version: '3.x'
       - name: Python syntax
         run: python -m py_compile runner/run.py runner/render_matrix.py
+      - name: Unit tests
+        run: python -m unittest discover -s tests
       - name: JSON validation
         run: |
           python - <<'PY'
