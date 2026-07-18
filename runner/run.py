@@ -19,6 +19,13 @@ def row(id, result, **kwargs):
     if result not in RESULTS: raise ValueError(result)
     out = {"id": id, "result": result}; out.update(kwargs); return out
 def passfail(ok): return "PASS" if ok else "FAIL"
+def parse_non_negative_int(value):
+    if value is None:
+        return None
+    number = int(value)
+    if number < 0:
+        raise ValueError(value)
+    return number
 
 def request(method, url, headers=None, body=b""):
     headers = dict(headers or {})
@@ -61,7 +68,11 @@ def run(target_path, output):
     first = request(method, endpoint, target_headers(target), normal)
     first_text = first["body"].decode("utf-8", "replace"); etag = header(first["headers"], "etag"); body_hash = sha256(first["body"])
     aq = header(first["headers"], "accept-query"); cl = header(first["headers"], "content-location")
-    rows += [row("core.native_query", passfail(first["status"] == 200), expected=200, observed=first["status"]), row("core.json_content_accepted", passfail(first["status"] == 200), expected=200, observed=first["status"]), row("core.accept_query_advertised", passfail(bool(aq)), evidence={"accept_query": aq}), row("representation.etag_advertised", passfail(bool(etag)), evidence={"etag": etag}), row("representation.etag_observed_strength", "OBSERVED", evidence={"etag": etag, "strength": etag_strength(etag)}), row("representation.content_location", passfail(bool(cl)), evidence={"content_location": cl})]
+    rows += [row("core.native_query", passfail(first["status"] == 200), expected=200, observed=first["status"]), row("core.json_content_accepted", passfail(first["status"] == 200), expected=200, observed=first["status"]), row("core.accept_query_advertised", passfail(bool(aq)), evidence={"accept_query": aq}), row("representation.etag_advertised", passfail(bool(etag)), evidence={"etag": etag}), row("representation.etag_observed_strength", "OBSERVED", evidence={"etag": etag, "strength": etag_strength(etag)})]
+    if caps.get("content_location"):
+        rows.append(row("representation.content_location", passfail(bool(cl)), evidence={"content_location": cl}))
+    else:
+        rows.append(row("representation.content_location", "NOT_SUPPORTED", evidence={"reason": "target does not expose a retrievable result resource"}))
     repeat = request(method, endpoint, target_headers(target), normal); repeat_etag = header(repeat["headers"], "etag")
     rows += [row("core.identical_request_repeatability", passfail(repeat["status"] == first["status"] and sha256(repeat["body"]) == body_hash), evidence={"first_body_sha256": body_hash, "repeat_body_sha256": sha256(repeat["body"])}), row("representation.identical_request_stable_validator", passfail(bool(etag) and etag == repeat_etag), evidence={"first_etag": etag, "repeat_etag": repeat_etag})]
     if etag:
@@ -91,7 +102,20 @@ def run(target_path, output):
             jj = json.loads(first_text); safety = jj.get("safety", {}); explain = jj.get("explain", {})
             rows += [row("ayder.no_committed_offset_advance", passfail(safety.get("committed_offset_before") == safety.get("committed_offset_after")), evidence=safety), row("ayder.no_broker_state_mutation", passfail(safety.get("broker_state_mutated") is False), evidence=safety), row("ayder.bounded_snapshot_stability", passfail(explain.get("messages_scanned") == 3 and explain.get("messages_matched") == 2), evidence=explain)]
         except Exception as exc: rows += [row("ayder.no_committed_offset_advance", "UNVERIFIED", evidence={"error":str(exc)}), row("ayder.no_broker_state_mutation", "UNVERIFIED"), row("ayder.bounded_snapshot_stability", "UNVERIFIED")]
+        try:
+            limit = parse_non_negative_int(header(first["headers"], "x-ratelimit-limit"))
+            remaining = parse_non_negative_int(header(first["headers"], "x-ratelimit-remaining"))
+            reset = parse_non_negative_int(header(first["headers"], "x-ratelimit-reset"))
+            if limit is None and remaining is None and reset is None:
+                rows.append(row("ayder.rate_limit_headers_sane", "NOT_SUPPORTED", evidence={"reason": "rate limit headers not emitted"}))
+            else:
+                sane = limit is not None and remaining is not None and reset is not None and limit > 0 and remaining <= limit and reset > 0
+                rows.append(row("ayder.rate_limit_headers_sane", passfail(sane), evidence={"limit": limit, "remaining": remaining, "reset": reset}))
+        except Exception as exc:
+            rows.append(row("ayder.rate_limit_headers_sane", "FAIL", evidence={"error": str(exc), "limit": header(first["headers"], "x-ratelimit-limit"), "remaining": header(first["headers"], "x-ratelimit-remaining"), "reset": header(first["headers"], "x-ratelimit-reset")}))
     else: rows += [row("ayder.no_committed_offset_advance", "NOT_APPLICABLE"), row("ayder.no_broker_state_mutation", "NOT_APPLICABLE"), row("ayder.bounded_snapshot_stability", "NOT_APPLICABLE")]
+    if not caps.get("implementation_safety_receipt"):
+        rows.append(row("ayder.rate_limit_headers_sane", "NOT_APPLICABLE"))
     summary = {k.lower(): 0 for k in RESULTS}
     for r in rows: summary[r["result"].lower()] += 1
     parsed = urllib.parse.urlparse(endpoint)

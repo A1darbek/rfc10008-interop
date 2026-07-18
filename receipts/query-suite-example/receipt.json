@@ -1,0 +1,189 @@
+{
+  "environment": {
+    "cdn": "cloudflare",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-aarch64-with-glibc2.42",
+    "transport": "https"
+  },
+  "generated_at": "2026-07-18T21:04:28Z",
+  "observations": {
+    "first_body_sha256": "151b966a24e06976dd3c114f984f27f188acf22cbea46214ef7801b23614aef9",
+    "first_response_headers": {
+      "accept-query": "application/json",
+      "access-control-allow-origin": "*",
+      "access-control-expose-headers": "etag,content-location,accept-query",
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "cf-ray": "a1d4705c2aadef8b-WAW",
+      "connection": "keep-alive",
+      "content-length": "383",
+      "content-location": "https://query-suite-example.danmat.workers.dev/stocks/search",
+      "content-type": "application/json",
+      "date": "Sat, 18 Jul 2026 21:04:27 GMT",
+      "etag": "\"FRuWaiTgaXbdPBFPmE8n8Yis8iy-pGIU73gBsjYUrvk\"",
+      "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=nDp0drMIcITqEFMD8leNMdGrdOFsmBTBewrAhfOWgWI5VK7xTllvPuFB8O2dePnuhhoXiUqcmZneHzRCHizLZvAa0D0XU5k33QSDB9duUuFLi2yOtv%2Bh%2B1taNTf2aJNEQ8CFqvGBJiWcbDJW2s2OSyG2Pa8Te2sWxQ%3D%3D\"}]}",
+      "server": "cloudflare"
+    },
+    "first_status": 200
+  },
+  "rows": [
+    {
+      "expected": 200,
+      "id": "core.native_query",
+      "observed": 200,
+      "result": "PASS"
+    },
+    {
+      "expected": 200,
+      "id": "core.json_content_accepted",
+      "observed": 200,
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "accept_query": "application/json"
+      },
+      "id": "core.accept_query_advertised",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "etag": "\"FRuWaiTgaXbdPBFPmE8n8Yis8iy-pGIU73gBsjYUrvk\""
+      },
+      "id": "representation.etag_advertised",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "etag": "\"FRuWaiTgaXbdPBFPmE8n8Yis8iy-pGIU73gBsjYUrvk\"",
+        "strength": "strong"
+      },
+      "id": "representation.etag_observed_strength",
+      "result": "OBSERVED"
+    },
+    {
+      "evidence": {
+        "content_location": "https://query-suite-example.danmat.workers.dev/stocks/search"
+      },
+      "id": "representation.content_location",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "first_body_sha256": "151b966a24e06976dd3c114f984f27f188acf22cbea46214ef7801b23614aef9",
+        "repeat_body_sha256": "151b966a24e06976dd3c114f984f27f188acf22cbea46214ef7801b23614aef9"
+      },
+      "id": "core.identical_request_repeatability",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "first_etag": "\"FRuWaiTgaXbdPBFPmE8n8Yis8iy-pGIU73gBsjYUrvk\"",
+        "repeat_etag": "\"FRuWaiTgaXbdPBFPmE8n8Yis8iy-pGIU73gBsjYUrvk\""
+      },
+      "id": "representation.identical_request_stable_validator",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "etag": "\"FRuWaiTgaXbdPBFPmE8n8Yis8iy-pGIU73gBsjYUrvk\""
+      },
+      "expected": 304,
+      "id": "representation.conditional_revalidation",
+      "observed": 304,
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "accept_query": "application/json"
+      },
+      "expected": 415,
+      "id": "core.unsupported_content_type",
+      "observed": 415,
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "body_sha256": "afaeb5f4e63d0f4c96bdeef3a05374de1849c9183107aab486f646570496f6b0"
+      },
+      "id": "core.missing_content_type",
+      "observed": 400,
+      "result": "OBSERVED"
+    },
+    {
+      "evidence": {
+        "body_sha256": "151b966a24e06976dd3c114f984f27f188acf22cbea46214ef7801b23614aef9",
+        "etag": "\"FRuWaiTgaXbdPBFPmE8n8Yis8iy-pGIU73gBsjYUrvk\"",
+        "strength": "strong"
+      },
+      "id": "representation.identity_encoding_probe",
+      "observed": 200,
+      "result": "OBSERVED"
+    },
+    {
+      "evidence": {
+        "reason": "target does not declare semantic query identity canonicalization"
+      },
+      "id": "semantic.equivalent_json_same_identity",
+      "result": "NOT_SUPPORTED"
+    },
+    {
+      "expected": 200,
+      "id": "core.method_override",
+      "observed": 200,
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "first_body_sha256": "151b966a24e06976dd3c114f984f27f188acf22cbea46214ef7801b23614aef9",
+        "repeat_body_sha256": "151b966a24e06976dd3c114f984f27f188acf22cbea46214ef7801b23614aef9",
+        "repeat_status": 200
+      },
+      "id": "safety.no_unintended_side_effects",
+      "result": "OBSERVED"
+    },
+    {
+      "evidence": {
+        "generic_http_runner": true
+      },
+      "id": "safety.state_before_after_recorded",
+      "result": "OBSERVED"
+    },
+    {
+      "id": "ayder.no_committed_offset_advance",
+      "result": "NOT_APPLICABLE"
+    },
+    {
+      "id": "ayder.no_broker_state_mutation",
+      "result": "NOT_APPLICABLE"
+    },
+    {
+      "id": "ayder.bounded_snapshot_stability",
+      "result": "NOT_APPLICABLE"
+    },
+    {
+      "id": "ayder.rate_limit_headers_sane",
+      "result": "NOT_APPLICABLE"
+    }
+  ],
+  "run_id": "20260718T210428Z-query-suite-example-live",
+  "runner": {
+    "commit": "7e740e5db93c9c06b1b0adba86ded31bada7a6c9",
+    "repository": "A1darbek/rfc10008-interop"
+  },
+  "schema_version": "0.1",
+  "summary": {
+    "fail": 0,
+    "not_applicable": 4,
+    "not_supported": 1,
+    "observed": 5,
+    "pass": 10,
+    "unverified": 0
+  },
+  "target": {
+    "endpoint": "https://query-suite-example.danmat.workers.dev/stocks/search",
+    "id": "query-suite-example-live",
+    "implementation_commit": "10a0e1648df58d14adfd24492b66af8e98873a7d",
+    "implementation_url": "https://github.com/DanMat/query-suite-example",
+    "name": "query-suite-example"
+  }
+}

@@ -1,0 +1,51 @@
+============================================================
+ RFC 10008 QUERY INTEROP RECEIPT
+============================================================
+ target       : query-suite-example-live
+ endpoint     : https://query-suite-example.danmat.workers.dev/stocks/search
+ generated_at : 2026-07-18T21:04:28Z
+ runner       : 7e740e5db93c9c06b1b0adba86ded31bada7a6c9
+------------------------------------------------------------
+ summary      : PASS=10 FAIL=0 OBSERVED=5 UNVERIFIED=0 NOT_SUPPORTED=1 NOT_APPLICABLE=4
+------------------------------------------------------------
+ PASS            core.native_query
+   expected=200 observed=200
+ PASS            core.json_content_accepted
+   expected=200 observed=200
+ PASS            core.accept_query_advertised
+   evidence={"accept_query": "application/json"}
+ PASS            representation.etag_advertised
+   evidence={"etag": "\"FRuWaiTgaXbdPBFPmE8n8Yis8iy-pGIU73gBsjYUrvk\""}
+ OBSERVED        representation.etag_observed_strength
+   evidence={"etag": "\"FRuWaiTgaXbdPBFPmE8n8Yis8iy-pGIU73gBsjYUrvk\"", "strength": "strong"}
+ PASS            representation.content_location
+   evidence={"content_location": "https://query-suite-example.danmat.workers.dev/stocks/search"}
+ PASS            core.identical_request_repeatability
+   evidence={"first_body_sha256": "151b966a24e06976dd3c114f984f27f188acf22cbea46214ef7801b23614aef9", "repeat_body_sha256": "151b966a24e06976dd3c114f984f27f188acf22cbea46214ef7801b23614aef9"}
+ PASS            representation.identical_request_stable_validator
+   evidence={"first_etag": "\"FRuWaiTgaXbdPBFPmE8n8Yis8iy-pGIU73gBsjYUrvk\"", "repeat_etag": "\"FRuWaiTgaXbdPBFPmE8n8Yis8iy-pGIU73gBsjYUrvk\""}
+ PASS            representation.conditional_revalidation
+   expected=304 observed=304
+   evidence={"etag": "\"FRuWaiTgaXbdPBFPmE8n8Yis8iy-pGIU73gBsjYUrvk\""}
+ PASS            core.unsupported_content_type
+   expected=415 observed=415
+   evidence={"accept_query": "application/json"}
+ OBSERVED        core.missing_content_type
+   expected=None observed=400
+   evidence={"body_sha256": "afaeb5f4e63d0f4c96bdeef3a05374de1849c9183107aab486f646570496f6b0"}
+ OBSERVED        representation.identity_encoding_probe
+   expected=None observed=200
+   evidence={"body_sha256": "151b966a24e06976dd3c114f984f27f188acf22cbea46214ef7801b23614aef9", "etag": "\"FRuWaiTgaXbdPBFPmE8n8Yis8iy-pGIU73gBsjYUrvk\"", "strength": "strong"}
+ NOT_SUPPORTED   semantic.equivalent_json_same_identity
+   evidence={"reason": "target does not declare semantic query identity canonicalization"}
+ PASS            core.method_override
+   expected=200 observed=200
+ OBSERVED        safety.no_unintended_side_effects
+   evidence={"first_body_sha256": "151b966a24e06976dd3c114f984f27f188acf22cbea46214ef7801b23614aef9", "repeat_body_sha256": "151b966a24e06976dd3c114f984f27f188acf22cbea46214ef7801b23614aef9", "repeat_status": 200}
+ OBSERVED        safety.state_before_after_recorded
+   evidence={"generic_http_runner": true}
+ NOT_APPLICABLE  ayder.no_committed_offset_advance
+ NOT_APPLICABLE  ayder.no_broker_state_mutation
+ NOT_APPLICABLE  ayder.bounded_snapshot_stability
+ NOT_APPLICABLE  ayder.rate_limit_headers_sane
+============================================================

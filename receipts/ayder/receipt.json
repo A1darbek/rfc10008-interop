@@ -1,0 +1,229 @@
+{
+  "environment": {
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-aarch64-with-glibc2.42",
+    "transport": "http"
+  },
+  "generated_at": "2026-07-18T21:04:19Z",
+  "observations": {
+    "first_body_sha256": "2c5f1afa38152c087052ffe7eb9003549010c0b3e7bca5380c19b081634db8c5",
+    "first_response_headers": {
+      "accept-query": "application/json",
+      "access-control-allow-headers": "Content-Type, Authorization",
+      "access-control-allow-methods": "GET, POST, PUT, DELETE, QUERY, OPTIONS",
+      "access-control-allow-origin": "*",
+      "access-control-expose-headers": "Accept-Query, ETag",
+      "cache-control": "no-cache",
+      "connection": "keep-alive",
+      "content-length": "1266",
+      "content-type": "application/json; charset=utf-8",
+      "date": "Sat, 18 Jul 2026 21:04:18 GMT",
+      "etag": "\"ayder-query-sha256-753694fb60975885eb5d75c976162fd0e27f4ab3b535ecf0e300a084a8a47411\"",
+      "server": "Ayder/3.0",
+      "x-ratelimit-limit": "5000",
+      "x-ratelimit-remaining": "4999",
+      "x-ratelimit-reset": "1784408660"
+    },
+    "first_status": 200
+  },
+  "rows": [
+    {
+      "expected": 200,
+      "id": "core.native_query",
+      "observed": 200,
+      "result": "PASS"
+    },
+    {
+      "expected": 200,
+      "id": "core.json_content_accepted",
+      "observed": 200,
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "accept_query": "application/json"
+      },
+      "id": "core.accept_query_advertised",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "etag": "\"ayder-query-sha256-753694fb60975885eb5d75c976162fd0e27f4ab3b535ecf0e300a084a8a47411\""
+      },
+      "id": "representation.etag_advertised",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "etag": "\"ayder-query-sha256-753694fb60975885eb5d75c976162fd0e27f4ab3b535ecf0e300a084a8a47411\"",
+        "strength": "strong"
+      },
+      "id": "representation.etag_observed_strength",
+      "result": "OBSERVED"
+    },
+    {
+      "evidence": {
+        "reason": "target does not expose a retrievable result resource"
+      },
+      "id": "representation.content_location",
+      "result": "NOT_SUPPORTED"
+    },
+    {
+      "evidence": {
+        "first_body_sha256": "2c5f1afa38152c087052ffe7eb9003549010c0b3e7bca5380c19b081634db8c5",
+        "repeat_body_sha256": "2c5f1afa38152c087052ffe7eb9003549010c0b3e7bca5380c19b081634db8c5"
+      },
+      "id": "core.identical_request_repeatability",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "first_etag": "\"ayder-query-sha256-753694fb60975885eb5d75c976162fd0e27f4ab3b535ecf0e300a084a8a47411\"",
+        "repeat_etag": "\"ayder-query-sha256-753694fb60975885eb5d75c976162fd0e27f4ab3b535ecf0e300a084a8a47411\""
+      },
+      "id": "representation.identical_request_stable_validator",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "etag": "\"ayder-query-sha256-753694fb60975885eb5d75c976162fd0e27f4ab3b535ecf0e300a084a8a47411\""
+      },
+      "expected": 304,
+      "id": "representation.conditional_revalidation",
+      "observed": 304,
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "accept_query": "application/json"
+      },
+      "expected": 415,
+      "id": "core.unsupported_content_type",
+      "observed": 415,
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "body_sha256": "473ac0203323fbf3e271602b8379646cb29b7d6acd7ebccb09c86095f38e6fcb"
+      },
+      "id": "core.missing_content_type",
+      "observed": 400,
+      "result": "OBSERVED"
+    },
+    {
+      "evidence": {
+        "body_sha256": "2c5f1afa38152c087052ffe7eb9003549010c0b3e7bca5380c19b081634db8c5",
+        "etag": "\"ayder-query-sha256-753694fb60975885eb5d75c976162fd0e27f4ab3b535ecf0e300a084a8a47411\"",
+        "strength": "strong"
+      },
+      "id": "representation.identity_encoding_probe",
+      "observed": 200,
+      "result": "OBSERVED"
+    },
+    {
+      "evidence": {
+        "equivalent_etag": "\"ayder-query-sha256-753694fb60975885eb5d75c976162fd0e27f4ab3b535ecf0e300a084a8a47411\"",
+        "equivalent_fingerprint": "sha256:753694fb60975885eb5d75c976162fd0e27f4ab3b535ecf0e300a084a8a47411",
+        "first_etag": "\"ayder-query-sha256-753694fb60975885eb5d75c976162fd0e27f4ab3b535ecf0e300a084a8a47411\"",
+        "first_fingerprint": "sha256:753694fb60975885eb5d75c976162fd0e27f4ab3b535ecf0e300a084a8a47411"
+      },
+      "id": "semantic.equivalent_json_same_identity",
+      "result": "PASS"
+    },
+    {
+      "id": "core.method_override",
+      "result": "NOT_APPLICABLE"
+    },
+    {
+      "evidence": {
+        "first_body_sha256": "2c5f1afa38152c087052ffe7eb9003549010c0b3e7bca5380c19b081634db8c5",
+        "repeat_body_sha256": "2c5f1afa38152c087052ffe7eb9003549010c0b3e7bca5380c19b081634db8c5",
+        "repeat_status": 200
+      },
+      "id": "safety.no_unintended_side_effects",
+      "result": "OBSERVED"
+    },
+    {
+      "evidence": {
+        "generic_http_runner": true
+      },
+      "id": "safety.state_before_after_recorded",
+      "result": "OBSERVED"
+    },
+    {
+      "evidence": {
+        "broker_state_mutated": false,
+        "committed_offset_after": 0,
+        "committed_offset_before": 0,
+        "high_watermark_after": 3,
+        "high_watermark_before": 3,
+        "idempotency_records_after": 0,
+        "idempotency_records_before": 0,
+        "message_count_after": 3,
+        "message_count_before": 3
+      },
+      "id": "ayder.no_committed_offset_advance",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "broker_state_mutated": false,
+        "committed_offset_after": 0,
+        "committed_offset_before": 0,
+        "high_watermark_after": 3,
+        "high_watermark_before": 3,
+        "idempotency_records_after": 0,
+        "idempotency_records_before": 0,
+        "message_count_after": 3,
+        "message_count_before": 3
+      },
+      "id": "ayder.no_broker_state_mutation",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "broker_state_mutated": false,
+        "commits_mutated": false,
+        "from_offset": 0,
+        "messages_matched": 2,
+        "messages_scanned": 3,
+        "partition": 0,
+        "plan": "bounded_partition_scan",
+        "segments_read": 1,
+        "to_offset": 3,
+        "topic": "payment-recovery"
+      },
+      "id": "ayder.bounded_snapshot_stability",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "limit": 5000,
+        "remaining": 4999,
+        "reset": 1784408660
+      },
+      "id": "ayder.rate_limit_headers_sane",
+      "result": "PASS"
+    }
+  ],
+  "run_id": "20260718T210419Z-ayder-local",
+  "runner": {
+    "commit": "7e740e5db93c9c06b1b0adba86ded31bada7a6c9",
+    "repository": "A1darbek/rfc10008-interop"
+  },
+  "schema_version": "0.1",
+  "summary": {
+    "fail": 0,
+    "not_applicable": 1,
+    "not_supported": 1,
+    "observed": 5,
+    "pass": 13,
+    "unverified": 0
+  },
+  "target": {
+    "endpoint": "http://localhost:1109/broker/query",
+    "id": "ayder-local",
+    "implementation_commit": "2ddb6e346194c445445b04a4ffa5d1f9f700eaf2",
+    "implementation_url": "https://github.com/A1darbek/ayder",
+    "name": "Ayder"
+  }
+}

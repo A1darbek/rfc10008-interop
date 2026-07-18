@@ -12,6 +12,7 @@
   "request_body_file": "targets/query-suite-example/request.json",
   "equivalent_request_body_file": "targets/query-suite-example/request-equivalent.json",
   "capabilities": {
+    "content_location": true,
     "method_override": true,
     "semantic_query_identity": false,
     "implementation_safety_receipt": false
