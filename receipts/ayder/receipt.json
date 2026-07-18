@@ -3,7 +3,7 @@
     "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-aarch64-with-glibc2.42",
     "transport": "http"
   },
-  "generated_at": "2026-07-17T20:33:33Z",
+  "generated_at": "2026-07-18T21:04:19Z",
   "observations": {
     "first_body_sha256": "2c5f1afa38152c087052ffe7eb9003549010c0b3e7bca5380c19b081634db8c5",
     "first_response_headers": {
@@ -11,18 +11,17 @@
       "access-control-allow-headers": "Content-Type, Authorization",
       "access-control-allow-methods": "GET, POST, PUT, DELETE, QUERY, OPTIONS",
       "access-control-allow-origin": "*",
-      "access-control-expose-headers": "Accept-Query, ETag, Content-Location",
+      "access-control-expose-headers": "Accept-Query, ETag",
       "cache-control": "no-cache",
       "connection": "keep-alive",
       "content-length": "1266",
-      "content-location": "/broker/query-results/sha256:753694fb60975885eb5d75c976162fd0e27f4ab3b535ecf0e300a084a8a47411",
       "content-type": "application/json; charset=utf-8",
-      "date": "Fri, 17 Jul 2026 20:33:33 GMT",
+      "date": "Sat, 18 Jul 2026 21:04:18 GMT",
       "etag": "\"ayder-query-sha256-753694fb60975885eb5d75c976162fd0e27f4ab3b535ecf0e300a084a8a47411\"",
       "server": "Ayder/3.0",
-      "x-ratelimit-limit": "153581795",
-      "x-ratelimit-remaining": "651588038",
-      "x-ratelimit-reset": "1784320414"
+      "x-ratelimit-limit": "5000",
+      "x-ratelimit-remaining": "4999",
+      "x-ratelimit-reset": "1784408660"
     },
     "first_status": 200
   },
@@ -63,10 +62,10 @@
     },
     {
       "evidence": {
-        "content_location": "/broker/query-results/sha256:753694fb60975885eb5d75c976162fd0e27f4ab3b535ecf0e300a084a8a47411"
+        "reason": "target does not expose a retrievable result resource"
       },
       "id": "representation.content_location",
-      "result": "PASS"
+      "result": "NOT_SUPPORTED"
     },
     {
       "evidence": {
@@ -195,18 +194,27 @@
       },
       "id": "ayder.bounded_snapshot_stability",
       "result": "PASS"
+    },
+    {
+      "evidence": {
+        "limit": 5000,
+        "remaining": 4999,
+        "reset": 1784408660
+      },
+      "id": "ayder.rate_limit_headers_sane",
+      "result": "PASS"
     }
   ],
-  "run_id": "20260717T203333Z-ayder-local",
+  "run_id": "20260718T210419Z-ayder-local",
   "runner": {
-    "commit": "ad6f2905891319165bcdb5a0da75b220a2d37d36",
+    "commit": "7e740e5db93c9c06b1b0adba86ded31bada7a6c9",
     "repository": "A1darbek/rfc10008-interop"
   },
   "schema_version": "0.1",
   "summary": {
     "fail": 0,
     "not_applicable": 1,
-    "not_supported": 0,
+    "not_supported": 1,
     "observed": 5,
     "pass": 13,
     "unverified": 0
@@ -214,7 +222,7 @@
   "target": {
     "endpoint": "http://localhost:1109/broker/query",
     "id": "ayder-local",
-    "implementation_commit": "unknown",
+    "implementation_commit": "2ddb6e346194c445445b04a4ffa5d1f9f700eaf2",
     "implementation_url": "https://github.com/A1darbek/ayder",
     "name": "Ayder"
   }

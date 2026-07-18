@@ -13,7 +13,7 @@ Generated from `receipts/**/receipt.json`.
 | Core | Identical request repeatability | PASS | PASS |
 | Representation | ETag advertised | PASS | PASS |
 | Representation | Conditional revalidation -> 304 | PASS | PASS |
-| Representation | Content-Location advertised | PASS | PASS |
+| Representation | Content-Location advertised | NOT_SUPPORTED | PASS |
 | Representation | Validator strength | OBSERVED | OBSERVED |
 | Representation | Accept-Encoding: identity probe | OBSERVED | OBSERVED |
 | Semantic identity | Equivalent JSON -> same identity | PASS | NOT_SUPPORTED |
@@ -21,3 +21,4 @@ Generated from `receipts/**/receipt.json`.
 | Ayder safety | No committed-offset advance | PASS | NOT_APPLICABLE |
 | Ayder safety | No broker-state mutation | PASS | NOT_APPLICABLE |
 | Ayder safety | Bounded snapshot stability | PASS | NOT_APPLICABLE |
+| Ayder safety | Rate-limit headers sane | PASS | NOT_APPLICABLE |

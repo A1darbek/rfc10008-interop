@@ -3,6 +3,7 @@
   "id": "ayder-local",
   "name": "Ayder",
   "implementation_url": "https://github.com/A1darbek/ayder",
+  "implementation_commit": "2ddb6e346194c445445b04a4ffa5d1f9f700eaf2",
   "endpoint": "http://localhost:1109/broker/query",
   "method": "QUERY",
   "headers": {
@@ -12,6 +13,7 @@
   "request_body_file": "targets/ayder/request.json",
   "equivalent_request_body_file": "targets/ayder/request-equivalent.json",
   "capabilities": {
+    "content_location": false,
     "method_override": false,
     "semantic_query_identity": true,
     "implementation_safety_receipt": true

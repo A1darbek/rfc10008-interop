@@ -4,7 +4,7 @@
     "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-aarch64-with-glibc2.42",
     "transport": "https"
   },
-  "generated_at": "2026-07-17T20:33:16Z",
+  "generated_at": "2026-07-18T21:04:28Z",
   "observations": {
     "first_body_sha256": "151b966a24e06976dd3c114f984f27f188acf22cbea46214ef7801b23614aef9",
     "first_response_headers": {
@@ -12,15 +12,15 @@
       "access-control-allow-origin": "*",
       "access-control-expose-headers": "etag,content-location,accept-query",
       "alt-svc": "h3=\":443\"; ma=86400",
-      "cf-ray": "a1cc054edb800202-WAW",
+      "cf-ray": "a1d4705c2aadef8b-WAW",
       "connection": "keep-alive",
       "content-length": "383",
       "content-location": "https://query-suite-example.danmat.workers.dev/stocks/search",
       "content-type": "application/json",
-      "date": "Fri, 17 Jul 2026 20:33:16 GMT",
+      "date": "Sat, 18 Jul 2026 21:04:27 GMT",
       "etag": "\"FRuWaiTgaXbdPBFPmE8n8Yis8iy-pGIU73gBsjYUrvk\"",
       "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
-      "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=%2FnQAXkIRj54W0BjGorwcYUlrXrw3%2B4VHe9m6IKFMIoIGNtxAqOxVd1HNJpr3sgaU9kOulVVYoT%2F1SooLhxRHCKKYxfZijx9fQlRxA%2BP5AcqQJAhn74%2BWn7ZvCc19lMLtRYPatoc1zB1I6APLuEEp%2BeQNVSoUcdipBA%3D%3D\"}]}",
+      "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=nDp0drMIcITqEFMD8leNMdGrdOFsmBTBewrAhfOWgWI5VK7xTllvPuFB8O2dePnuhhoXiUqcmZneHzRCHizLZvAa0D0XU5k33QSDB9duUuFLi2yOtv%2Bh%2B1taNTf2aJNEQ8CFqvGBJiWcbDJW2s2OSyG2Pa8Te2sWxQ%3D%3D\"}]}",
       "server": "cloudflare"
     },
     "first_status": 200
@@ -159,17 +159,21 @@
     {
       "id": "ayder.bounded_snapshot_stability",
       "result": "NOT_APPLICABLE"
+    },
+    {
+      "id": "ayder.rate_limit_headers_sane",
+      "result": "NOT_APPLICABLE"
     }
   ],
-  "run_id": "20260717T203316Z-query-suite-example-live",
+  "run_id": "20260718T210428Z-query-suite-example-live",
   "runner": {
-    "commit": "22ce2b64eae4dd145dcf71285dcd6d704243d8ee",
+    "commit": "7e740e5db93c9c06b1b0adba86ded31bada7a6c9",
     "repository": "A1darbek/rfc10008-interop"
   },
   "schema_version": "0.1",
   "summary": {
     "fail": 0,
-    "not_applicable": 3,
+    "not_applicable": 4,
     "not_supported": 1,
     "observed": 5,
     "pass": 10,

@@ -3,10 +3,10 @@
 ============================================================
  target       : query-suite-example-live
  endpoint     : https://query-suite-example.danmat.workers.dev/stocks/search
- generated_at : 2026-07-17T20:33:16Z
- runner       : 22ce2b64eae4dd145dcf71285dcd6d704243d8ee
+ generated_at : 2026-07-18T21:04:28Z
+ runner       : 7e740e5db93c9c06b1b0adba86ded31bada7a6c9
 ------------------------------------------------------------
- summary      : PASS=10 FAIL=0 OBSERVED=5 UNVERIFIED=0 NOT_SUPPORTED=1 NOT_APPLICABLE=3
+ summary      : PASS=10 FAIL=0 OBSERVED=5 UNVERIFIED=0 NOT_SUPPORTED=1 NOT_APPLICABLE=4
 ------------------------------------------------------------
  PASS            core.native_query
    expected=200 observed=200
@@ -47,4 +47,5 @@
  NOT_APPLICABLE  ayder.no_committed_offset_advance
  NOT_APPLICABLE  ayder.no_broker_state_mutation
  NOT_APPLICABLE  ayder.bounded_snapshot_stability
+ NOT_APPLICABLE  ayder.rate_limit_headers_sane
 ============================================================
