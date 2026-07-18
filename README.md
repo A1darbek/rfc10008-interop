@@ -59,3 +59,36 @@ Semantic query identity is intentionally optional. For example, canonical JSON
 fingerprinting can be useful for cache identity, but RFC 10008 interoperability
 does not require every implementation to canonicalize semantically equivalent
 JSON bodies.
+
+## Target Contract
+
+Target files use JSON so the runner remains dependency-free. `schema_version`
+`0.2` separates declared capabilities from target-specific expectations:
+
+```json
+{
+  "schema_version": "0.2",
+  "capabilities": {
+    "accept_query": true,
+    "etag": true,
+    "conditional_revalidation": true,
+    "content_location": false,
+    "semantic_query_identity": false,
+    "method_override": false,
+    "cors_preflight": false,
+    "cache_observability": false,
+    "implementation_safety_receipt": false
+  },
+  "expectations": {
+    "native_query_status": 200,
+    "supported_content_type_status": 200,
+    "unsupported_content_type_status": 415,
+    "missing_content_type_mode": "observe"
+  }
+}
+```
+
+Declared capabilities that are observed produce `PASS`. Declared capabilities
+that are absent produce `FAIL`. Undeclared optional capabilities produce
+`NOT_SUPPORTED`. Expectation modes are `assert`, `observe`, `not_supported`,
+and `not_applicable`.

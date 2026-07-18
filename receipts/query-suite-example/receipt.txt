@@ -3,8 +3,8 @@
 ============================================================
  target       : query-suite-example-live
  endpoint     : https://query-suite-example.danmat.workers.dev/stocks/search
- generated_at : 2026-07-18T21:04:28Z
- runner       : 7e740e5db93c9c06b1b0adba86ded31bada7a6c9
+ generated_at : 2026-07-18T21:07:34Z
+ runner       : c21660d28de7dd5d6cbfb5109f93f5bf930f1d76
 ------------------------------------------------------------
  summary      : PASS=10 FAIL=0 OBSERVED=5 UNVERIFIED=0 NOT_SUPPORTED=1 NOT_APPLICABLE=4
 ------------------------------------------------------------

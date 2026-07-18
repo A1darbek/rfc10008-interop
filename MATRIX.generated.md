@@ -9,7 +9,7 @@ Generated from `receipts/**/receipt.json`.
 | Core | Unsupported Content-Type rejected | PASS | PASS |
 | Core | Missing Content-Type handled | OBSERVED | OBSERVED |
 | Core | Accept-Query advertised | PASS | PASS |
-| Core | POST method override | NOT_APPLICABLE | PASS |
+| Core | POST method override | NOT_SUPPORTED | PASS |
 | Core | Identical request repeatability | PASS | PASS |
 | Representation | ETag advertised | PASS | PASS |
 | Representation | Conditional revalidation -> 304 | PASS | PASS |

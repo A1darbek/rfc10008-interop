@@ -26,6 +26,24 @@ def parse_non_negative_int(value):
     if number < 0:
         raise ValueError(value)
     return number
+def capability_row(id, caps, capability, observed, evidence=None, unsupported_reason=None):
+    if caps.get(capability):
+        return row(id, passfail(bool(observed)), evidence=evidence or {})
+    return row(id, "NOT_SUPPORTED", evidence={"reason": unsupported_reason or f"target does not declare {capability}"})
+def status_expectation(expectations, key, default_status=None, default_mode="assert"):
+    mode = expectations.get(key.replace("_status", "_mode"), default_mode)
+    status = expectations.get(key, default_status)
+    return status, mode
+def status_row(id, observed_status, expected_status=None, mode="assert", evidence=None):
+    if mode == "assert":
+        return row(id, passfail(observed_status == expected_status), expected=expected_status, observed=observed_status, evidence=evidence or {})
+    if mode == "observe":
+        return row(id, "OBSERVED", expected=expected_status, observed=observed_status, evidence=evidence or {})
+    if mode == "not_supported":
+        return row(id, "NOT_SUPPORTED", observed=observed_status, evidence=evidence or {})
+    if mode == "not_applicable":
+        return row(id, "NOT_APPLICABLE", observed=observed_status, evidence=evidence or {})
+    raise ValueError(f"bad expectation mode {mode!r} for {id}")
 
 def request(method, url, headers=None, body=b""):
     headers = dict(headers or {})
@@ -62,27 +80,41 @@ def bootstrap_ayder(target):
 def run(target_path, output):
     root = repo_root(); target = load_json(target_path); output = Path(output); output.mkdir(parents=True, exist_ok=True)
     normal = body_bytes(root / target["request_body_file"]); equiv = body_bytes(root / target["equivalent_request_body_file"])
-    endpoint = target["endpoint"]; method = target.get("method", "QUERY"); caps = target.get("capabilities", {})
+    endpoint = target["endpoint"]; method = target.get("method", "QUERY"); caps = target.get("capabilities", {}); expectations = target.get("expectations", {})
     bootstrap_ayder(target)
     rows = []
     first = request(method, endpoint, target_headers(target), normal)
     first_text = first["body"].decode("utf-8", "replace"); etag = header(first["headers"], "etag"); body_hash = sha256(first["body"])
     aq = header(first["headers"], "accept-query"); cl = header(first["headers"], "content-location")
-    rows += [row("core.native_query", passfail(first["status"] == 200), expected=200, observed=first["status"]), row("core.json_content_accepted", passfail(first["status"] == 200), expected=200, observed=first["status"]), row("core.accept_query_advertised", passfail(bool(aq)), evidence={"accept_query": aq}), row("representation.etag_advertised", passfail(bool(etag)), evidence={"etag": etag}), row("representation.etag_observed_strength", "OBSERVED", evidence={"etag": etag, "strength": etag_strength(etag)})]
-    if caps.get("content_location"):
-        rows.append(row("representation.content_location", passfail(bool(cl)), evidence={"content_location": cl}))
-    else:
-        rows.append(row("representation.content_location", "NOT_SUPPORTED", evidence={"reason": "target does not expose a retrievable result resource"}))
+    native_status, native_mode = status_expectation(expectations, "native_query_status", 200)
+    supported_status, supported_mode = status_expectation(expectations, "supported_content_type_status", native_status)
+    rows += [
+        status_row("core.native_query", first["status"], native_status, native_mode),
+        status_row("core.json_content_accepted", first["status"], supported_status, supported_mode),
+        capability_row("core.accept_query_advertised", caps, "accept_query", bool(aq), evidence={"accept_query": aq}),
+        capability_row("representation.etag_advertised", caps, "etag", bool(etag), evidence={"etag": etag}),
+        row("representation.etag_observed_strength", "OBSERVED", evidence={"etag": etag, "strength": etag_strength(etag)}),
+        capability_row("representation.content_location", caps, "content_location", bool(cl), evidence={"content_location": cl}, unsupported_reason="target does not expose a retrievable result resource"),
+    ]
     repeat = request(method, endpoint, target_headers(target), normal); repeat_etag = header(repeat["headers"], "etag")
-    rows += [row("core.identical_request_repeatability", passfail(repeat["status"] == first["status"] and sha256(repeat["body"]) == body_hash), evidence={"first_body_sha256": body_hash, "repeat_body_sha256": sha256(repeat["body"])}), row("representation.identical_request_stable_validator", passfail(bool(etag) and etag == repeat_etag), evidence={"first_etag": etag, "repeat_etag": repeat_etag})]
-    if etag:
+    rows.append(row("core.identical_request_repeatability", passfail(repeat["status"] == first["status"] and sha256(repeat["body"]) == body_hash), evidence={"first_body_sha256": body_hash, "repeat_body_sha256": sha256(repeat["body"])}))
+    if caps.get("etag"):
+        rows.append(row("representation.identical_request_stable_validator", passfail(bool(etag) and etag == repeat_etag), evidence={"first_etag": etag, "repeat_etag": repeat_etag}))
+    else:
+        rows.append(row("representation.identical_request_stable_validator", "NOT_SUPPORTED", evidence={"reason": "target does not declare etag"}))
+    if caps.get("conditional_revalidation") and etag:
         h = target_headers(target); h["If-None-Match"] = etag; reval = request(method, endpoint, h, normal)
         rows.append(row("representation.conditional_revalidation", passfail(reval["status"] == 304), expected=304, observed=reval["status"], evidence={"etag": etag}))
-    else: rows.append(row("representation.conditional_revalidation", "UNVERIFIED", evidence={"reason":"no etag"}))
+    elif caps.get("conditional_revalidation"):
+        rows.append(row("representation.conditional_revalidation", "UNVERIFIED", evidence={"reason":"no etag"}))
+    else:
+        rows.append(row("representation.conditional_revalidation", "NOT_SUPPORTED", evidence={"reason": "target does not declare conditional_revalidation"}))
     unsupported = request(method, endpoint, {**target_headers(target, False), "Content-Type":"text/plain"}, b"not json")
-    rows.append(row("core.unsupported_content_type", passfail(unsupported["status"] == 415), expected=415, observed=unsupported["status"], evidence={"accept_query": header(unsupported["headers"], "accept-query")}))
+    unsupported_status, unsupported_mode = status_expectation(expectations, "unsupported_content_type_status", 415)
+    rows.append(status_row("core.unsupported_content_type", unsupported["status"], unsupported_status, unsupported_mode, evidence={"accept_query": header(unsupported["headers"], "accept-query")}))
     missing = request(method, endpoint, target_headers(target, False), normal)
-    rows.append(row("core.missing_content_type", "OBSERVED", observed=missing["status"], evidence={"body_sha256": sha256(missing["body"])}))
+    missing_status, missing_mode = status_expectation(expectations, "missing_content_type_status", None, "observe")
+    rows.append(status_row("core.missing_content_type", missing["status"], missing_status, missing_mode, evidence={"body_sha256": sha256(missing["body"])}))
     ih = target_headers(target); ih["Accept-Encoding"] = "identity"; identity = request(method, endpoint, ih, normal); ietag = header(identity["headers"], "etag")
     rows.append(row("representation.identity_encoding_probe", "OBSERVED", observed=identity["status"], evidence={"etag": ietag, "strength": etag_strength(ietag), "body_sha256": sha256(identity["body"])}))
     if caps.get("semantic_query_identity"):
@@ -95,7 +127,7 @@ def run(target_path, output):
     if caps.get("method_override"):
         h = target_headers(target); h["X-HTTP-Method-Override"] = "QUERY"; over = request("POST", endpoint, h, normal)
         rows.append(row("core.method_override", passfail(over["status"] == 200), expected=200, observed=over["status"]))
-    else: rows.append(row("core.method_override", "NOT_APPLICABLE"))
+    else: rows.append(row("core.method_override", "NOT_SUPPORTED", evidence={"reason": "target does not declare method_override"}))
     rows += [row("safety.no_unintended_side_effects", "OBSERVED", evidence={"repeat_status": repeat["status"], "first_body_sha256": body_hash, "repeat_body_sha256": sha256(repeat["body"])}), row("safety.state_before_after_recorded", "OBSERVED", evidence={"generic_http_runner": True})]
     if caps.get("implementation_safety_receipt"):
         try:

@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.1",
+  "schema_version": "0.2",
   "id": "query-suite-example-live",
   "name": "query-suite-example",
   "implementation_url": "https://github.com/DanMat/query-suite-example",
@@ -12,10 +12,21 @@
   "request_body_file": "targets/query-suite-example/request.json",
   "equivalent_request_body_file": "targets/query-suite-example/request-equivalent.json",
   "capabilities": {
+    "accept_query": true,
+    "etag": true,
+    "conditional_revalidation": true,
     "content_location": true,
     "method_override": true,
     "semantic_query_identity": false,
+    "cors_preflight": false,
+    "cache_observability": false,
     "implementation_safety_receipt": false
+  },
+  "expectations": {
+    "native_query_status": 200,
+    "supported_content_type_status": 200,
+    "unsupported_content_type_status": 415,
+    "missing_content_type_mode": "observe"
   },
   "environment": {
     "transport": "https",

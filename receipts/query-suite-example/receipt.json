@@ -4,7 +4,7 @@
     "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-aarch64-with-glibc2.42",
     "transport": "https"
   },
-  "generated_at": "2026-07-18T21:04:28Z",
+  "generated_at": "2026-07-18T21:07:34Z",
   "observations": {
     "first_body_sha256": "151b966a24e06976dd3c114f984f27f188acf22cbea46214ef7801b23614aef9",
     "first_response_headers": {
@@ -12,27 +12,29 @@
       "access-control-allow-origin": "*",
       "access-control-expose-headers": "etag,content-location,accept-query",
       "alt-svc": "h3=\":443\"; ma=86400",
-      "cf-ray": "a1d4705c2aadef8b-WAW",
+      "cf-ray": "a1d474e76a9101ee-WAW",
       "connection": "keep-alive",
       "content-length": "383",
       "content-location": "https://query-suite-example.danmat.workers.dev/stocks/search",
       "content-type": "application/json",
-      "date": "Sat, 18 Jul 2026 21:04:27 GMT",
+      "date": "Sat, 18 Jul 2026 21:07:33 GMT",
       "etag": "\"FRuWaiTgaXbdPBFPmE8n8Yis8iy-pGIU73gBsjYUrvk\"",
       "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
-      "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=nDp0drMIcITqEFMD8leNMdGrdOFsmBTBewrAhfOWgWI5VK7xTllvPuFB8O2dePnuhhoXiUqcmZneHzRCHizLZvAa0D0XU5k33QSDB9duUuFLi2yOtv%2Bh%2B1taNTf2aJNEQ8CFqvGBJiWcbDJW2s2OSyG2Pa8Te2sWxQ%3D%3D\"}]}",
+      "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=ij7QTJ80l0azQpBxvpftTZ%2FqB6epP0Srudvnsi5v41bVzZdeMS6mKueNWjIwUJwZ4LG2EKdqrAELyI%2BuSXlXs%2Fv9VDPDAL8FDBH8v6QBVEjuJ07I4LJQvWxQUEvAuARGSu%2FkEq%2FB8z%2FkOjZSwmvd4L%2B9ENoJAJl7mA%3D%3D\"}]}",
       "server": "cloudflare"
     },
     "first_status": 200
   },
   "rows": [
     {
+      "evidence": {},
       "expected": 200,
       "id": "core.native_query",
       "observed": 200,
       "result": "PASS"
     },
     {
+      "evidence": {},
       "expected": 200,
       "id": "core.json_content_accepted",
       "observed": 200,
@@ -105,6 +107,7 @@
       "evidence": {
         "body_sha256": "afaeb5f4e63d0f4c96bdeef3a05374de1849c9183107aab486f646570496f6b0"
       },
+      "expected": null,
       "id": "core.missing_content_type",
       "observed": 400,
       "result": "OBSERVED"
@@ -165,9 +168,9 @@
       "result": "NOT_APPLICABLE"
     }
   ],
-  "run_id": "20260718T210428Z-query-suite-example-live",
+  "run_id": "20260718T210734Z-query-suite-example-live",
   "runner": {
-    "commit": "7e740e5db93c9c06b1b0adba86ded31bada7a6c9",
+    "commit": "c21660d28de7dd5d6cbfb5109f93f5bf930f1d76",
     "repository": "A1darbek/rfc10008-interop"
   },
   "schema_version": "0.1",
