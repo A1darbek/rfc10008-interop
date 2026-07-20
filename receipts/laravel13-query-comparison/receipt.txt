@@ -1,9 +1,9 @@
 ============================================================
  LARAVEL 13 QUERY INTEROP RECEIPT
 ============================================================
- target       : laravel13-native
+ target       : laravel13-query-comparison
  endpoint     : http://localhost:8080/mock/orders
- generated_at : 2026-07-20T21:28:15Z
+ generated_at : 2026-07-20T21:55:56Z
 ------------------------------------------------------------
  summary      : PASS=8 FAIL=0 OBSERVED=8 UNVERIFIED=0 NOT_SUPPORTED=9 NOT_APPLICABLE=4
 ------------------------------------------------------------

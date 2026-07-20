@@ -115,12 +115,12 @@ def main():
     summary = summarize(rows)
     receipt = {
         "schema_version": "0.1",
-        "run_id": f"{dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%SZ')}-laravel13-native",
+        "run_id": f"{dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%SZ')}-laravel13-query-comparison",
         "generated_at": now(),
         "runner": generic.get("runner", {}),
         "target": {
-            "id": "laravel13-native",
-            "name": "Laravel 13 native QUERY comparison",
+            "id": "laravel13-query-comparison",
+            "name": "Laravel 13 QUERY comparison",
             "implementation_url": "https://github.com/phoenix1331/laravel-http-query-demo",
             "implementation_commit": "af19ed98eb77b62f5156ce285dc2ea135788519a",
             "endpoint": args.endpoint,
@@ -134,7 +134,12 @@ def main():
             "query_status": query["status"],
             "query_body_sha256": query["sha256"],
             "preflight_status": preflight["status"],
-            "local_runtime_patch": "Dockerfile php:8.2-apache -> php:8.3-apache for Laravel 13 lockfile compatibility",
+            "runtime_patch": {
+                "source_runtime": "php:8.2-apache",
+                "executed_runtime": "php:8.3-apache",
+                "reason": "Pinned Laravel 13 lockfile requires PHP ^8.3",
+                "modification": "deterministic local execution patch",
+            },
         },
         "rows": rows,
         "summary": summary,
