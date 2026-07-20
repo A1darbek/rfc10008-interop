@@ -1,0 +1,36 @@
+{
+  "schema_version": "0.2",
+  "id": "ledger-query",
+  "name": "Ledger Query",
+  "implementation_url": "https://github.com/Keshav-behl/LEDGER-QUERY",
+  "implementation_commit": "e60d86d978b212e2b7794b7d6cdb8bf0b03b49c2",
+  "endpoint": "http://localhost:8080/transactions",
+  "method": "QUERY",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "request_body_file": "targets/ledger-query/request.json",
+  "equivalent_request_body_file": "targets/ledger-query/request-equivalent.json",
+  "capabilities": {
+    "accept_query": true,
+    "etag": false,
+    "conditional_revalidation": false,
+    "content_location": false,
+    "semantic_query_identity": false,
+    "method_override": false,
+    "cors_preflight": false,
+    "cache_observability": true,
+    "implementation_safety_receipt": false
+  },
+  "expectations": {
+    "native_query_status": 200,
+    "supported_content_type_status": 200,
+    "unsupported_content_type_status": 415,
+    "missing_content_type_mode": "observe"
+  },
+  "environment": {
+    "database": "postgres",
+    "cache": "redis",
+    "transport": "local-http"
+  }
+}

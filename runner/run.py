@@ -85,13 +85,14 @@ def run(target_path, output):
     rows = []
     first = request(method, endpoint, target_headers(target), normal)
     first_text = first["body"].decode("utf-8", "replace"); etag = header(first["headers"], "etag"); body_hash = sha256(first["body"])
-    aq = header(first["headers"], "accept-query"); cl = header(first["headers"], "content-location")
+    options = request("OPTIONS", endpoint, target_headers(target, False), b"") if caps.get("accept_query") else None
+    aq = header(first["headers"], "accept-query") or (header(options["headers"], "accept-query") if options else None); cl = header(first["headers"], "content-location")
     native_status, native_mode = status_expectation(expectations, "native_query_status", 200)
     supported_status, supported_mode = status_expectation(expectations, "supported_content_type_status", native_status)
     rows += [
         status_row("core.native_query", first["status"], native_status, native_mode),
         status_row("core.json_content_accepted", first["status"], supported_status, supported_mode),
-        capability_row("core.accept_query_advertised", caps, "accept_query", bool(aq), evidence={"accept_query": aq}),
+        capability_row("core.accept_query_advertised", caps, "accept_query", bool(aq), evidence={"query_accept_query": header(first["headers"], "accept-query"), "options_accept_query": header(options["headers"], "accept-query") if options else None}),
         capability_row("representation.etag_advertised", caps, "etag", bool(etag), evidence={"etag": etag}),
         row("representation.etag_observed_strength", "OBSERVED", evidence={"etag": etag, "strength": etag_strength(etag)}),
         capability_row("representation.content_location", caps, "content_location", bool(cl), evidence={"content_location": cl}, unsupported_reason="target does not expose a retrievable result resource"),
