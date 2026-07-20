@@ -1,0 +1,305 @@
+{
+  "environment": {
+    "cache": "redis",
+    "database": "postgres",
+    "docker_image": "golang@sha256:3aff6657219a4d9c14e27fb1d8976c49c29fddb70ba835014f477e1c70636647",
+    "go_execution": "docker-fallback",
+    "go_version": "go version go1.26.5 linux/arm64",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-aarch64-with-glibc2.42",
+    "transport": "http"
+  },
+  "generated_at": "2026-07-20T22:01:42Z",
+  "observations": {
+    "after": {
+      "account_balance": 2000,
+      "account_count": 2,
+      "ledger_entry_count": 4
+    },
+    "before": {
+      "account_balance": 2000,
+      "account_count": 2,
+      "ledger_entry_count": 4
+    },
+    "cache_sequence": {
+      "a1": "MISS",
+      "a2": "HIT",
+      "a3": "HIT",
+      "b1": "MISS"
+    }
+  },
+  "rows": [
+    {
+      "evidence": {},
+      "expected": 200,
+      "id": "core.native_query",
+      "observed": 200,
+      "result": "PASS"
+    },
+    {
+      "evidence": {},
+      "expected": 200,
+      "id": "core.json_content_accepted",
+      "observed": 200,
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "options_accept_query": "application/json",
+        "query_accept_query": null
+      },
+      "id": "core.accept_query_advertised",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "reason": "target does not declare etag"
+      },
+      "id": "representation.etag_advertised",
+      "result": "NOT_SUPPORTED"
+    },
+    {
+      "evidence": {
+        "etag": null,
+        "strength": "none"
+      },
+      "id": "representation.etag_observed_strength",
+      "result": "OBSERVED"
+    },
+    {
+      "evidence": {
+        "reason": "target does not expose a retrievable result resource"
+      },
+      "id": "representation.content_location",
+      "result": "NOT_SUPPORTED"
+    },
+    {
+      "evidence": {
+        "first_body_sha256": "c0f1c46008f4480ec5e57e6f884ff29328b7d453389606b88ed5dd5be71d4487",
+        "repeat_body_sha256": "c0f1c46008f4480ec5e57e6f884ff29328b7d453389606b88ed5dd5be71d4487"
+      },
+      "id": "core.identical_request_repeatability",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "reason": "target does not declare etag"
+      },
+      "id": "representation.identical_request_stable_validator",
+      "result": "NOT_SUPPORTED"
+    },
+    {
+      "evidence": {
+        "reason": "target does not declare conditional_revalidation"
+      },
+      "id": "representation.conditional_revalidation",
+      "result": "NOT_SUPPORTED"
+    },
+    {
+      "evidence": {
+        "accept_query": null
+      },
+      "expected": 415,
+      "id": "core.unsupported_content_type",
+      "observed": 415,
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "body_sha256": "73481f2ed035a2888416b59fbe1470b602ac129bf637421fcc880f403496d930"
+      },
+      "expected": null,
+      "id": "core.missing_content_type",
+      "observed": 415,
+      "result": "OBSERVED"
+    },
+    {
+      "evidence": {
+        "body_sha256": "c0f1c46008f4480ec5e57e6f884ff29328b7d453389606b88ed5dd5be71d4487",
+        "etag": null,
+        "strength": "none"
+      },
+      "id": "representation.identity_encoding_probe",
+      "observed": 200,
+      "result": "OBSERVED"
+    },
+    {
+      "evidence": {
+        "reason": "target does not declare semantic query identity canonicalization"
+      },
+      "id": "semantic.equivalent_json_same_identity",
+      "result": "NOT_SUPPORTED"
+    },
+    {
+      "evidence": {
+        "reason": "target does not declare method_override"
+      },
+      "id": "core.method_override",
+      "result": "NOT_SUPPORTED"
+    },
+    {
+      "evidence": {
+        "first_body_sha256": "c0f1c46008f4480ec5e57e6f884ff29328b7d453389606b88ed5dd5be71d4487",
+        "repeat_body_sha256": "c0f1c46008f4480ec5e57e6f884ff29328b7d453389606b88ed5dd5be71d4487",
+        "repeat_status": 200
+      },
+      "id": "safety.no_unintended_side_effects",
+      "result": "OBSERVED"
+    },
+    {
+      "evidence": {
+        "generic_http_runner": true
+      },
+      "id": "safety.state_before_after_recorded",
+      "result": "OBSERVED"
+    },
+    {
+      "id": "ayder.no_committed_offset_advance",
+      "result": "NOT_APPLICABLE"
+    },
+    {
+      "id": "ayder.no_broker_state_mutation",
+      "result": "NOT_APPLICABLE"
+    },
+    {
+      "id": "ayder.bounded_snapshot_stability",
+      "result": "NOT_APPLICABLE"
+    },
+    {
+      "id": "ayder.rate_limit_headers_sane",
+      "result": "NOT_APPLICABLE"
+    },
+    {
+      "expected": 200,
+      "id": "ledger.native_query",
+      "observed": 200,
+      "result": "PASS"
+    },
+    {
+      "expected": 200,
+      "id": "ledger.json_content_type",
+      "observed": 200,
+      "result": "PASS"
+    },
+    {
+      "expected": 415,
+      "id": "ledger.unsupported_content_type_415",
+      "observed": 415,
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "accept_query": "application/json"
+      },
+      "expected": 204,
+      "id": "ledger.accept_query_options",
+      "observed": 204,
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "x_cache": "MISS"
+      },
+      "id": "ledger.cache_first_request_miss",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "x_cache": "HIT"
+      },
+      "id": "ledger.cache_identical_request_hit",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "x_cache": "MISS"
+      },
+      "id": "ledger.cache_different_body_miss",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "x_cache": "HIT"
+      },
+      "id": "ledger.cache_return_to_first_body_hit",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "a1": "c0f1c46008f4480ec5e57e6f884ff29328b7d453389606b88ed5dd5be71d4487",
+        "a2": "c0f1c46008f4480ec5e57e6f884ff29328b7d453389606b88ed5dd5be71d4487",
+        "a3": "c0f1c46008f4480ec5e57e6f884ff29328b7d453389606b88ed5dd5be71d4487"
+      },
+      "id": "ledger.cache_exact_response_replay",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "body_a": "c0f1c46008f4480ec5e57e6f884ff29328b7d453389606b88ed5dd5be71d4487",
+        "body_b": "a5b12787629fc2d599e941ee19c15d08d4a5038557b256aab8c8f63803aee7ae"
+      },
+      "id": "ledger.cache_no_cross_body_collision",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "after": 2000,
+        "before": 2000
+      },
+      "id": "ledger.account_balance_unchanged",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "after": 4,
+        "before": 4
+      },
+      "id": "ledger.entry_count_unchanged",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "after": 2,
+        "before": 2
+      },
+      "id": "ledger.account_count_unchanged",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "exit_code": 0,
+        "output_tail": "go: downloading github.com/jackc/pgx/v5 v5.10.0\ngo: downloading github.com/redis/go-redis/v9 v9.21.0\ngo: downloading github.com/google/uuid v1.6.0\ngo: downloading github.com/stretchr/testify v1.11.1\ngo: downloading github.com/davecgh/go-spew v1.1.1\ngo: downloading github.com/pmezard/go-difflib v1.0.0\ngo: downloading gopkg.in/yaml.v3 v3.0.1\ngo: downloading github.com/jackc/puddle/v2 v2.2.2\ngo: downloading github.com/jackc/pgpassfile v1.0.0\ngo: downloading github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761\ngo: downloading golang.org/x/text v0.29.0\ngo: downloading golang.org/x/sync v0.17.0\ngo: downloading github.com/cespare/xxhash/v2 v2.3.0\ngo: downloading go.uber.org/atomic v1.11.0\nok  \tgithub.com/Keshav-behl/ledger-query/internal/api\t0.018s\n"
+      },
+      "id": "ledger.read_only_pool_rejects_write",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "exit_code": 0,
+        "output_tail": "go: downloading github.com/stretchr/testify v1.11.1\ngo: downloading github.com/redis/go-redis/v9 v9.21.0\ngo: downloading github.com/google/uuid v1.6.0\ngo: downloading github.com/jackc/pgx/v5 v5.10.0\ngo: downloading github.com/jackc/puddle/v2 v2.2.2\ngo: downloading gopkg.in/yaml.v3 v3.0.1\ngo: downloading github.com/davecgh/go-spew v1.1.1\ngo: downloading github.com/pmezard/go-difflib v1.0.0\ngo: downloading github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761\ngo: downloading github.com/jackc/pgpassfile v1.0.0\ngo: downloading golang.org/x/text v0.29.0\ngo: downloading golang.org/x/sync v0.17.0\ngo: downloading github.com/cespare/xxhash/v2 v2.3.0\ngo: downloading go.uber.org/atomic v1.11.0\n?   \tgithub.com/Keshav-behl/ledger-query/cmd/server\t[no test files]\nok  \tgithub.com/Keshav-behl/ledger-query/internal/api\t2.295s\n?   \tgithub.com/Keshav-behl/ledger-query/internal/idempotency\t[no test files]\nok  \tgithub.com/Keshav-behl/ledger-query/internal/ledger\t1.528s\nok  \tgithub.com/Keshav-behl/ledger-query/internal/queryhttp\t1.032s\nok  \tgithub.com/Keshav-behl/ledger-query/internal/webhook\t1.082s\n"
+      },
+      "id": "ledger.project_tests",
+      "result": "PASS"
+    }
+  ],
+  "run_id": "20260720T220142Z-ledger-query",
+  "runner": {
+    "commit": "69ed0fc04b9e903b0569663e1b3f5c8b02185ba6",
+    "repository": "A1darbek/rfc10008-interop"
+  },
+  "schema_version": "0.1",
+  "summary": {
+    "fail": 0,
+    "not_applicable": 4,
+    "not_supported": 6,
+    "observed": 5,
+    "pass": 20,
+    "unverified": 0
+  },
+  "target": {
+    "endpoint": "http://localhost:8080/transactions",
+    "id": "ledger-query",
+    "implementation_commit": "e60d86d978b212e2b7794b7d6cdb8bf0b03b49c2",
+    "implementation_url": "https://github.com/Keshav-behl/LEDGER-QUERY",
+    "name": "Ledger Query"
+  }
+}

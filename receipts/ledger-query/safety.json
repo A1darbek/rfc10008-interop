@@ -1,0 +1,12 @@
+{
+  "after": {
+    "account_balance": 2000,
+    "account_count": 2,
+    "ledger_entry_count": 4
+  },
+  "before": {
+    "account_balance": 2000,
+    "account_count": 2,
+    "ledger_entry_count": 4
+  }
+}
