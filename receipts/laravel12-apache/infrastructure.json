@@ -50,15 +50,22 @@
     },
     {
       "evidence": {
-        "known_future_support": {
+        "known_future_cli_support": {
           "php_src_pr": 22615,
           "php_version": "8.6"
         },
-        "php_version": "PHP 8.2.32 (cli) (built: Jul 14 2026 01:36:12) (NTS)",
-        "server": "apache"
+        "request_path": "Apache mod_php",
+        "runtime": "PHP 8.2.32 (cli) (built: Jul 14 2026 01:36:12) (NTS)"
+      },
+      "id": "laravel12.php_runtime_observed",
+      "result": "OBSERVED"
+    },
+    {
+      "evidence": {
+        "reason": "PHP built-in development server is not executed by this Apache target"
       },
       "id": "laravel12.php_cli_server_behavior",
-      "result": "OBSERVED"
+      "result": "UNVERIFIED"
     }
   ],
   "schema_version": "0.1",
@@ -68,7 +75,7 @@
     "not_supported": 0,
     "observed": 2,
     "pass": 3,
-    "unverified": 0
+    "unverified": 1
   },
   "target": "laravel12-apache-generic"
 }

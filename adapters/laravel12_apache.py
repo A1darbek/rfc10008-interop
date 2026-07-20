@@ -97,12 +97,19 @@ def main():
 
     php_version = docker_php_version(args.compose_file) if args.compose_file else "unverified"
     rows.append(row(
-        "laravel12.php_cli_server_behavior",
+        "laravel12.php_runtime_observed",
         "OBSERVED",
         evidence={
-            "php_version": php_version,
-            "server": "apache",
-            "known_future_support": {"php_version": "8.6", "php_src_pr": 22615},
+            "runtime": php_version,
+            "request_path": "Apache mod_php",
+            "known_future_cli_support": {"php_version": "8.6", "php_src_pr": 22615},
+        },
+    ))
+    rows.append(row(
+        "laravel12.php_cli_server_behavior",
+        "UNVERIFIED",
+        evidence={
+            "reason": "PHP built-in development server is not executed by this Apache target",
         },
     ))
 

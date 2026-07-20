@@ -12,6 +12,7 @@ fi
 
 git -C "$IMPL" fetch --quiet origin
 git -C "$IMPL" checkout --quiet "$SHA"
+git -C "$IMPL" restore --source="$SHA" --worktree --staged Dockerfile
 
 docker compose -f "$IMPL/docker-compose.yml" down -v
 docker compose -f "$IMPL/docker-compose.yml" up -d --build
