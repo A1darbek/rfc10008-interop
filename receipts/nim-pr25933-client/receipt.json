@@ -1,0 +1,238 @@
+{
+  "rows": [
+    {
+      "evidence": {
+        "http_query": "QUERY"
+      },
+      "id": "nim.method_query_constant",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "accept_query": "application/json",
+        "body_len": 689,
+        "code": "200 OK",
+        "etag": "\"ayder-query-sha256-50930cdb03640c7b680b095f82cb084892e1deff51c9a9c83debe3897a799013\"",
+        "status": "200 OK"
+      },
+      "id": "nim.sync_client_body_preserved",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "accept_query": "application/json",
+        "body_len": 689,
+        "code": "200 OK",
+        "etag": "\"ayder-query-sha256-50930cdb03640c7b680b095f82cb084892e1deff51c9a9c83debe3897a799013\"",
+        "status": "200 OK"
+      },
+      "id": "nim.async_client_body_preserved",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "body": "{\"chunk\":true}",
+        "content_length": "",
+        "content_type": "application/json",
+        "method": "QUERY",
+        "path": "/echo"
+      },
+      "id": "nim.server_recognizes_query",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "body": "{\"expect\":true}",
+        "content_length": "15",
+        "content_type": "application/json",
+        "method": "QUERY",
+        "path": "/echo"
+      },
+      "id": "nim.server_content_length",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "body": "{\"chunk\":true}",
+        "content_length": "",
+        "content_type": "application/json",
+        "method": "QUERY",
+        "path": "/echo"
+      },
+      "id": "nim.server_chunked_body",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "head": [
+          "HTTP/1.1 100 Continue",
+          "HTTP/1.1 200 OK",
+          "content-type: application/json",
+          "Content-Length: 116"
+        ]
+      },
+      "id": "nim.server_expect_100_continue",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "async_etag": "\"ayder-query-sha256-50930cdb03640c7b680b095f82cb084892e1deff51c9a9c83debe3897a799013\"",
+        "sync_etag": "\"ayder-query-sha256-50930cdb03640c7b680b095f82cb084892e1deff51c9a9c83debe3897a799013\""
+      },
+      "id": "nim.ayder_etag_observed",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "reason": "client fixtures observe Ayder ETag; conditional revalidation is covered by Ayder target receipt"
+      },
+      "id": "nim.ayder_conditional_304",
+      "result": "UNVERIFIED"
+    },
+    {
+      "evidence": {
+        "body": "{\"probe\":\"redirect\"}",
+        "content_length": "20",
+        "content_type": "application/json",
+        "final_status": "200 OK",
+        "method": "QUERY",
+        "path": "/echo",
+        "redirect_code": "301"
+      },
+      "id": "nim.redirect_301_preserves_method",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "body": "{\"probe\":\"redirect\"}",
+        "content_length": "20",
+        "content_type": "application/json",
+        "final_status": "200 OK",
+        "method": "QUERY",
+        "path": "/echo",
+        "redirect_code": "301"
+      },
+      "id": "nim.redirect_301_preserves_body",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "body": "{\"probe\":\"redirect\"}",
+        "content_length": "20",
+        "content_type": "application/json",
+        "final_status": "200 OK",
+        "method": "QUERY",
+        "path": "/echo",
+        "redirect_code": "302"
+      },
+      "id": "nim.redirect_302_preserves_method",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "body": "{\"probe\":\"redirect\"}",
+        "content_length": "20",
+        "content_type": "application/json",
+        "final_status": "200 OK",
+        "method": "QUERY",
+        "path": "/echo",
+        "redirect_code": "302"
+      },
+      "id": "nim.redirect_302_preserves_body",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "body": "",
+        "content_length": "",
+        "content_type": "application/json",
+        "final_status": "200 OK",
+        "method": "GET",
+        "path": "/echo",
+        "redirect_code": "303"
+      },
+      "id": "nim.redirect_303_rewrites_to_get",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "body": "",
+        "content_length": "",
+        "content_type": "application/json",
+        "final_status": "200 OK",
+        "method": "GET",
+        "path": "/echo",
+        "redirect_code": "303"
+      },
+      "id": "nim.redirect_303_strips_body",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "body": "{\"probe\":\"redirect\"}",
+        "content_length": "20",
+        "content_type": "application/json",
+        "final_status": "200 OK",
+        "method": "QUERY",
+        "path": "/echo",
+        "redirect_code": "307"
+      },
+      "id": "nim.redirect_307_preserves_method",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "body": "{\"probe\":\"redirect\"}",
+        "content_length": "20",
+        "content_type": "application/json",
+        "final_status": "200 OK",
+        "method": "QUERY",
+        "path": "/echo",
+        "redirect_code": "307"
+      },
+      "id": "nim.redirect_307_preserves_body",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "body": "{\"probe\":\"redirect\"}",
+        "content_length": "20",
+        "content_type": "application/json",
+        "final_status": "200 OK",
+        "method": "QUERY",
+        "path": "/echo",
+        "redirect_code": "308"
+      },
+      "id": "nim.redirect_308_preserves_method",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "body": "{\"probe\":\"redirect\"}",
+        "content_length": "20",
+        "content_type": "application/json",
+        "final_status": "200 OK",
+        "method": "QUERY",
+        "path": "/echo",
+        "redirect_code": "308"
+      },
+      "id": "nim.redirect_308_preserves_body",
+      "result": "PASS"
+    }
+  ],
+  "schema_version": "0.1",
+  "summary": {
+    "fail": 0,
+    "not_applicable": 0,
+    "not_supported": 0,
+    "observed": 0,
+    "pass": 18,
+    "unverified": 1
+  },
+  "target": {
+    "id": "nim-pr25933-client",
+    "implementation_commit": "a233362101230b5930c5fa0005980973d3ab3627",
+    "implementation_url": "https://github.com/nim-lang/Nim/pull/25933",
+    "name": "Nim PR 25933 client and redirect probes"
+  }
+}
