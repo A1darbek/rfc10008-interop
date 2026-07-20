@@ -1,0 +1,50 @@
+============================================================
+ RFC 10008 QUERY INTEROP RECEIPT
+============================================================
+ target       : nim-pr25933-server
+ endpoint     : http://127.0.0.1:18133/query
+ generated_at : 2026-07-20T22:02:53Z
+ runner       : bc9c96f7b9ffcd6eec0bbeb2908427f3866c9e90
+------------------------------------------------------------
+ summary      : PASS=3 FAIL=0 OBSERVED=6 UNVERIFIED=0 NOT_SUPPORTED=7 NOT_APPLICABLE=4
+------------------------------------------------------------
+ PASS            core.native_query
+   expected=200 observed=200
+ PASS            core.json_content_accepted
+   expected=200 observed=200
+ NOT_SUPPORTED   core.accept_query_advertised
+   evidence={"reason": "target does not declare accept_query"}
+ NOT_SUPPORTED   representation.etag_advertised
+   evidence={"reason": "target does not declare etag"}
+ OBSERVED        representation.etag_observed_strength
+   evidence={"etag": null, "strength": "none"}
+ NOT_SUPPORTED   representation.content_location
+   evidence={"reason": "target does not expose a retrievable result resource"}
+ PASS            core.identical_request_repeatability
+   evidence={"first_body_sha256": "dce9bb981fe75bcbd518a722b4958e9d5f1ac6482fb2ae0ca127d3e8f071bfac", "repeat_body_sha256": "dce9bb981fe75bcbd518a722b4958e9d5f1ac6482fb2ae0ca127d3e8f071bfac"}
+ NOT_SUPPORTED   representation.identical_request_stable_validator
+   evidence={"reason": "target does not declare etag"}
+ NOT_SUPPORTED   representation.conditional_revalidation
+   evidence={"reason": "target does not declare conditional_revalidation"}
+ OBSERVED        core.unsupported_content_type
+   expected=415 observed=200
+   evidence={"accept_query": null}
+ OBSERVED        core.missing_content_type
+   expected=None observed=200
+   evidence={"body_sha256": "6057d07b3c15032903320e1bed9b767ba01bd1f7542d789719699d3192bb6419"}
+ OBSERVED        representation.identity_encoding_probe
+   expected=None observed=200
+   evidence={"body_sha256": "dce9bb981fe75bcbd518a722b4958e9d5f1ac6482fb2ae0ca127d3e8f071bfac", "etag": null, "strength": "none"}
+ NOT_SUPPORTED   semantic.equivalent_json_same_identity
+   evidence={"reason": "target does not declare semantic query identity canonicalization"}
+ NOT_SUPPORTED   core.method_override
+   evidence={"reason": "target does not declare method_override"}
+ OBSERVED        safety.no_unintended_side_effects
+   evidence={"first_body_sha256": "dce9bb981fe75bcbd518a722b4958e9d5f1ac6482fb2ae0ca127d3e8f071bfac", "repeat_body_sha256": "dce9bb981fe75bcbd518a722b4958e9d5f1ac6482fb2ae0ca127d3e8f071bfac", "repeat_status": 200}
+ OBSERVED        safety.state_before_after_recorded
+   evidence={"generic_http_runner": true}
+ NOT_APPLICABLE  ayder.no_committed_offset_advance
+ NOT_APPLICABLE  ayder.no_broker_state_mutation
+ NOT_APPLICABLE  ayder.bounded_snapshot_stability
+ NOT_APPLICABLE  ayder.rate_limit_headers_sane
+============================================================

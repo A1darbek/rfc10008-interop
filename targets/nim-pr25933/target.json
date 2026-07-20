@@ -1,0 +1,32 @@
+{
+  "schema_version": "0.2",
+  "id": "nim-pr25933-server",
+  "name": "Nim PR 25933 QUERY server",
+  "implementation_url": "https://github.com/nim-lang/Nim/pull/25933",
+  "implementation_commit": "a233362101230b5930c5fa0005980973d3ab3627",
+  "endpoint": "http://127.0.0.1:18133/query",
+  "method": "QUERY",
+  "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  },
+  "request_body_file": "targets/nim-pr25933/request.json",
+  "equivalent_request_body_file": "targets/nim-pr25933/request-equivalent.json",
+  "capabilities": {
+    "accept_query": false,
+    "etag": false,
+    "conditional_revalidation": false,
+    "content_location": false,
+    "semantic_query_identity": false,
+    "method_override": false,
+    "cors_preflight": false,
+    "cache_observability": false,
+    "implementation_safety_receipt": false
+  },
+  "expectations": {
+    "native_query_status": 200,
+    "supported_content_type_status": 200,
+    "unsupported_content_type_mode": "observe",
+    "missing_content_type_mode": "observe"
+  }
+}
