@@ -30,7 +30,7 @@ Generated from `receipts/**/receipt.json`.
 | Nim PR 25933 | Server parses chunked body | Pending | PASS | Pending | Pending |
 | Nim PR 25933 | Server handles Expect: 100-continue | Pending | PASS | Pending | Pending |
 | Nim PR 25933 | Nim client observes Ayder ETag | Pending | PASS | Pending | Pending |
-| Nim PR 25933 | Nim client conditional 304 | Pending | UNVERIFIED | Pending | Pending |
+| Nim PR 25933 | Nim client conditional 304 | Pending | PASS | Pending | Pending |
 | Nim PR 25933 | 301 preserves QUERY method | Pending | PASS | Pending | Pending |
 | Nim PR 25933 | 301 preserves body | Pending | PASS | Pending | Pending |
 | Nim PR 25933 | 302 preserves QUERY method | Pending | PASS | Pending | Pending |

@@ -103,6 +103,16 @@ def main():
     expect = expect_continue_probe()
 
     redirect_by_code = {item["redirect_code"]: item for item in redirects}
+    conditional_304 = sync.get("conditional_code") == "304" or sync.get("conditional_status") == "304 Not Modified"
+    conditional_evidence = {
+        "first_status": sync.get("status"),
+        "etag": sync.get("etag"),
+        "conditional_status": sync.get("conditional_status"),
+        "conditional_code": sync.get("conditional_code"),
+        "conditional_error": sync.get("conditional_error"),
+    }
+    if not conditional_304:
+        conditional_evidence["reason"] = "Ayder 304 is proven by the server target; direct observation through this Nim client fixture was not completed"
     rows = [
         row("nim.method_query_constant", "PASS", evidence={"http_query": "QUERY"}),
         row("nim.sync_client_body_preserved", "PASS" if sync.get("body_len", 0) > 0 else "FAIL", evidence=sync),
@@ -112,7 +122,7 @@ def main():
         row("nim.server_chunked_body", "PASS" if chunked["body"].get("body") == '{"chunk":true}' else "FAIL", evidence=chunked["body"]),
         row("nim.server_expect_100_continue", "PASS" if "100 Continue" in expect["head"] and expect["body"].get("body") == '{"expect":true}' else "FAIL", evidence={"head": expect["head"].splitlines()}),
         row("nim.ayder_etag_observed", "PASS" if sync.get("etag") else "FAIL", evidence={"sync_etag": sync.get("etag"), "async_etag": async_client.get("etag")}),
-        row("nim.ayder_conditional_304", "UNVERIFIED", evidence={"reason": "client fixtures observe Ayder ETag; conditional revalidation is covered by Ayder target receipt"}),
+        row("nim.ayder_conditional_304", "PASS" if conditional_304 else "UNVERIFIED", evidence=conditional_evidence),
     ]
     expectations = {
         "301": ("QUERY", '{"probe":"redirect"}'),

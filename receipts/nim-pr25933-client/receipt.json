@@ -12,6 +12,10 @@
         "accept_query": "application/json",
         "body_len": 689,
         "code": "200 OK",
+        "conditional_body_len": 0,
+        "conditional_code": "304 Not Modified",
+        "conditional_error": "",
+        "conditional_status": "304 Not Modified",
         "etag": "\"ayder-query-sha256-50930cdb03640c7b680b095f82cb084892e1deff51c9a9c83debe3897a799013\"",
         "status": "200 OK"
       },
@@ -84,10 +88,14 @@
     },
     {
       "evidence": {
-        "reason": "client fixtures observe Ayder ETag; conditional revalidation is covered by Ayder target receipt"
+        "conditional_code": "304 Not Modified",
+        "conditional_error": "",
+        "conditional_status": "304 Not Modified",
+        "etag": "\"ayder-query-sha256-50930cdb03640c7b680b095f82cb084892e1deff51c9a9c83debe3897a799013\"",
+        "first_status": "200 OK"
       },
       "id": "nim.ayder_conditional_304",
-      "result": "UNVERIFIED"
+      "result": "PASS"
     },
     {
       "evidence": {
@@ -226,8 +234,8 @@
     "not_applicable": 0,
     "not_supported": 0,
     "observed": 0,
-    "pass": 18,
-    "unverified": 1
+    "pass": 19,
+    "unverified": 0
   },
   "target": {
     "id": "nim-pr25933-client",

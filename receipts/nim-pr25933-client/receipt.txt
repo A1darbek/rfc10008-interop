@@ -2,12 +2,12 @@
  NIM PR 25933 QUERY INTEROP RECEIPT
 ============================================================
  target  : {'id': 'nim-pr25933-client', 'name': 'Nim PR 25933 client and redirect probes', 'implementation_commit': 'a233362101230b5930c5fa0005980973d3ab3627', 'implementation_url': 'https://github.com/nim-lang/Nim/pull/25933'}
- summary : PASS=18 FAIL=0 OBSERVED=0 UNVERIFIED=1 NOT_SUPPORTED=0 NOT_APPLICABLE=0
+ summary : PASS=19 FAIL=0 OBSERVED=0 UNVERIFIED=0 NOT_SUPPORTED=0 NOT_APPLICABLE=0
 ------------------------------------------------------------
  PASS            nim.method_query_constant
    evidence={"http_query": "QUERY"}
  PASS            nim.sync_client_body_preserved
-   evidence={"accept_query": "application/json", "body_len": 689, "code": "200 OK", "etag": "\"ayder-query-sha256-50930cdb03640c7b680b095f82cb084892e1deff51c9a9c83debe3897a799013\"", "status": "200 OK"}
+   evidence={"accept_query": "application/json", "body_len": 689, "code": "200 OK", "conditional_body_len": 0, "conditional_code": "304 Not Modified", "conditional_error": "", "conditional_status": "304 Not Modified", "etag": "\"ayder-query-sha256-50930cdb03640c7b680b095f82cb084892e1deff51c9a9c83debe3897a799013
  PASS            nim.async_client_body_preserved
    evidence={"accept_query": "application/json", "body_len": 689, "code": "200 OK", "etag": "\"ayder-query-sha256-50930cdb03640c7b680b095f82cb084892e1deff51c9a9c83debe3897a799013\"", "status": "200 OK"}
  PASS            nim.server_recognizes_query
@@ -20,8 +20,8 @@
    evidence={"head": ["HTTP/1.1 100 Continue", "HTTP/1.1 200 OK", "content-type: application/json", "Content-Length: 116"]}
  PASS            nim.ayder_etag_observed
    evidence={"async_etag": "\"ayder-query-sha256-50930cdb03640c7b680b095f82cb084892e1deff51c9a9c83debe3897a799013\"", "sync_etag": "\"ayder-query-sha256-50930cdb03640c7b680b095f82cb084892e1deff51c9a9c83debe3897a799013\""}
- UNVERIFIED      nim.ayder_conditional_304
-   evidence={"reason": "client fixtures observe Ayder ETag; conditional revalidation is covered by Ayder target receipt"}
+ PASS            nim.ayder_conditional_304
+   evidence={"conditional_code": "304 Not Modified", "conditional_error": "", "conditional_status": "304 Not Modified", "etag": "\"ayder-query-sha256-50930cdb03640c7b680b095f82cb084892e1deff51c9a9c83debe3897a799013\"", "first_status": "200 OK"}
  PASS            nim.redirect_301_preserves_method
    evidence={"body": "{\"probe\":\"redirect\"}", "content_length": "20", "content_type": "application/json", "final_status": "200 OK", "method": "QUERY", "path": "/echo", "redirect_code": "301"}
  PASS            nim.redirect_301_preserves_body
