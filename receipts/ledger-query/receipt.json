@@ -2,10 +2,13 @@
   "environment": {
     "cache": "redis",
     "database": "postgres",
+    "docker_image": "golang@sha256:3aff6657219a4d9c14e27fb1d8976c49c29fddb70ba835014f477e1c70636647",
+    "go_execution": "docker-fallback",
+    "go_version": "go version go1.26.5 linux/arm64",
     "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-aarch64-with-glibc2.42",
     "transport": "http"
   },
-  "generated_at": "2026-07-20T21:18:35Z",
+  "generated_at": "2026-07-20T22:01:42Z",
   "observations": {
     "after": {
       "account_balance": 2000,
@@ -71,8 +74,8 @@
     },
     {
       "evidence": {
-        "first_body_sha256": "8f0b33e75aa2a48263d39d011fe43e46e0aaeb2c2c684b0354ac542d6e60cccc",
-        "repeat_body_sha256": "8f0b33e75aa2a48263d39d011fe43e46e0aaeb2c2c684b0354ac542d6e60cccc"
+        "first_body_sha256": "c0f1c46008f4480ec5e57e6f884ff29328b7d453389606b88ed5dd5be71d4487",
+        "repeat_body_sha256": "c0f1c46008f4480ec5e57e6f884ff29328b7d453389606b88ed5dd5be71d4487"
       },
       "id": "core.identical_request_repeatability",
       "result": "PASS"
@@ -111,7 +114,7 @@
     },
     {
       "evidence": {
-        "body_sha256": "8f0b33e75aa2a48263d39d011fe43e46e0aaeb2c2c684b0354ac542d6e60cccc",
+        "body_sha256": "c0f1c46008f4480ec5e57e6f884ff29328b7d453389606b88ed5dd5be71d4487",
         "etag": null,
         "strength": "none"
       },
@@ -135,8 +138,8 @@
     },
     {
       "evidence": {
-        "first_body_sha256": "8f0b33e75aa2a48263d39d011fe43e46e0aaeb2c2c684b0354ac542d6e60cccc",
-        "repeat_body_sha256": "8f0b33e75aa2a48263d39d011fe43e46e0aaeb2c2c684b0354ac542d6e60cccc",
+        "first_body_sha256": "c0f1c46008f4480ec5e57e6f884ff29328b7d453389606b88ed5dd5be71d4487",
+        "repeat_body_sha256": "c0f1c46008f4480ec5e57e6f884ff29328b7d453389606b88ed5dd5be71d4487",
         "repeat_status": 200
       },
       "id": "safety.no_unintended_side_effects",
@@ -222,17 +225,17 @@
     },
     {
       "evidence": {
-        "a1": "8f0b33e75aa2a48263d39d011fe43e46e0aaeb2c2c684b0354ac542d6e60cccc",
-        "a2": "8f0b33e75aa2a48263d39d011fe43e46e0aaeb2c2c684b0354ac542d6e60cccc",
-        "a3": "8f0b33e75aa2a48263d39d011fe43e46e0aaeb2c2c684b0354ac542d6e60cccc"
+        "a1": "c0f1c46008f4480ec5e57e6f884ff29328b7d453389606b88ed5dd5be71d4487",
+        "a2": "c0f1c46008f4480ec5e57e6f884ff29328b7d453389606b88ed5dd5be71d4487",
+        "a3": "c0f1c46008f4480ec5e57e6f884ff29328b7d453389606b88ed5dd5be71d4487"
       },
       "id": "ledger.cache_exact_response_replay",
       "result": "PASS"
     },
     {
       "evidence": {
-        "body_a": "8f0b33e75aa2a48263d39d011fe43e46e0aaeb2c2c684b0354ac542d6e60cccc",
-        "body_b": "26bee22475854a8a04cd447fb8e1c2b3671ccc5438550b4e45da6f2837199cb9"
+        "body_a": "c0f1c46008f4480ec5e57e6f884ff29328b7d453389606b88ed5dd5be71d4487",
+        "body_b": "a5b12787629fc2d599e941ee19c15d08d4a5038557b256aab8c8f63803aee7ae"
       },
       "id": "ledger.cache_no_cross_body_collision",
       "result": "PASS"
@@ -264,7 +267,7 @@
     {
       "evidence": {
         "exit_code": 0,
-        "output_tail": "go: downloading github.com/jackc/pgx/v5 v5.10.0\ngo: downloading github.com/redis/go-redis/v9 v9.21.0\ngo: downloading github.com/stretchr/testify v1.11.1\ngo: downloading github.com/google/uuid v1.6.0\ngo: downloading github.com/davecgh/go-spew v1.1.1\ngo: downloading gopkg.in/yaml.v3 v3.0.1\ngo: downloading github.com/pmezard/go-difflib v1.0.0\ngo: downloading github.com/jackc/puddle/v2 v2.2.2\ngo: downloading github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761\ngo: downloading golang.org/x/text v0.29.0\ngo: downloading github.com/jackc/pgpassfile v1.0.0\ngo: downloading github.com/cespare/xxhash/v2 v2.3.0\ngo: downloading go.uber.org/atomic v1.11.0\ngo: downloading golang.org/x/sync v0.17.0\nok  \tgithub.com/Keshav-behl/ledger-query/internal/api\t0.018s\n"
+        "output_tail": "go: downloading github.com/jackc/pgx/v5 v5.10.0\ngo: downloading github.com/redis/go-redis/v9 v9.21.0\ngo: downloading github.com/google/uuid v1.6.0\ngo: downloading github.com/stretchr/testify v1.11.1\ngo: downloading github.com/davecgh/go-spew v1.1.1\ngo: downloading github.com/pmezard/go-difflib v1.0.0\ngo: downloading gopkg.in/yaml.v3 v3.0.1\ngo: downloading github.com/jackc/puddle/v2 v2.2.2\ngo: downloading github.com/jackc/pgpassfile v1.0.0\ngo: downloading github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761\ngo: downloading golang.org/x/text v0.29.0\ngo: downloading golang.org/x/sync v0.17.0\ngo: downloading github.com/cespare/xxhash/v2 v2.3.0\ngo: downloading go.uber.org/atomic v1.11.0\nok  \tgithub.com/Keshav-behl/ledger-query/internal/api\t0.018s\n"
       },
       "id": "ledger.read_only_pool_rejects_write",
       "result": "PASS"
@@ -272,15 +275,15 @@
     {
       "evidence": {
         "exit_code": 0,
-        "output_tail": "go: downloading github.com/jackc/pgx/v5 v5.10.0\ngo: downloading github.com/redis/go-redis/v9 v9.21.0\ngo: downloading github.com/google/uuid v1.6.0\ngo: downloading github.com/stretchr/testify v1.11.1\ngo: downloading github.com/davecgh/go-spew v1.1.1\ngo: downloading github.com/pmezard/go-difflib v1.0.0\ngo: downloading gopkg.in/yaml.v3 v3.0.1\ngo: downloading github.com/jackc/pgpassfile v1.0.0\ngo: downloading github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761\ngo: downloading golang.org/x/text v0.29.0\ngo: downloading github.com/jackc/puddle/v2 v2.2.2\ngo: downloading golang.org/x/sync v0.17.0\ngo: downloading go.uber.org/atomic v1.11.0\ngo: downloading github.com/cespare/xxhash/v2 v2.3.0\n?   \tgithub.com/Keshav-behl/ledger-query/cmd/server\t[no test files]\nok  \tgithub.com/Keshav-behl/ledger-query/internal/api\t2.324s\n?   \tgithub.com/Keshav-behl/ledger-query/internal/idempotency\t[no test files]\nok  \tgithub.com/Keshav-behl/ledger-query/internal/ledger\t1.516s\nok  \tgithub.com/Keshav-behl/ledger-query/internal/queryhttp\t1.031s\nok  \tgithub.com/Keshav-behl/ledger-query/internal/webhook\t1.085s\n"
+        "output_tail": "go: downloading github.com/stretchr/testify v1.11.1\ngo: downloading github.com/redis/go-redis/v9 v9.21.0\ngo: downloading github.com/google/uuid v1.6.0\ngo: downloading github.com/jackc/pgx/v5 v5.10.0\ngo: downloading github.com/jackc/puddle/v2 v2.2.2\ngo: downloading gopkg.in/yaml.v3 v3.0.1\ngo: downloading github.com/davecgh/go-spew v1.1.1\ngo: downloading github.com/pmezard/go-difflib v1.0.0\ngo: downloading github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761\ngo: downloading github.com/jackc/pgpassfile v1.0.0\ngo: downloading golang.org/x/text v0.29.0\ngo: downloading golang.org/x/sync v0.17.0\ngo: downloading github.com/cespare/xxhash/v2 v2.3.0\ngo: downloading go.uber.org/atomic v1.11.0\n?   \tgithub.com/Keshav-behl/ledger-query/cmd/server\t[no test files]\nok  \tgithub.com/Keshav-behl/ledger-query/internal/api\t2.295s\n?   \tgithub.com/Keshav-behl/ledger-query/internal/idempotency\t[no test files]\nok  \tgithub.com/Keshav-behl/ledger-query/internal/ledger\t1.528s\nok  \tgithub.com/Keshav-behl/ledger-query/internal/queryhttp\t1.032s\nok  \tgithub.com/Keshav-behl/ledger-query/internal/webhook\t1.082s\n"
       },
       "id": "ledger.project_tests",
       "result": "PASS"
     }
   ],
-  "run_id": "20260720T211835Z-ledger-query",
+  "run_id": "20260720T220142Z-ledger-query",
   "runner": {
-    "commit": "ade0e56ec4f696eccf026a3135181f2b7fa26f59",
+    "commit": "69ed0fc04b9e903b0569663e1b3f5c8b02185ba6",
     "repository": "A1darbek/rfc10008-interop"
   },
   "schema_version": "0.1",

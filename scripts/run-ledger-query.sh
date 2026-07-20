@@ -5,7 +5,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 IMPL="${LEDGER_IMPL:-$ROOT/implementations/ledger-query}"
 OUT="$ROOT/receipts/ledger-query"
 WORK="$ROOT/.work/ledger-query-generic"
-GO_IMAGE="${GO_IMAGE:-golang:1.26}"
+GO_IMAGE="${GO_IMAGE:-golang@sha256:3aff6657219a4d9c14e27fb1d8976c49c29fddb70ba835014f477e1c70636647}"
 
 "$ROOT/scripts/setup-ledger-query.sh"
 

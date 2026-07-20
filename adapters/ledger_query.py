@@ -73,6 +73,18 @@ def go_cmd(impl, go_image, args):
         *args,
     ]
 
+def go_execution_metadata(impl, go_image):
+    uses_local_go = bool(shutil.which("go"))
+    result = run_cmd(go_cmd(impl, go_image, ["version"]), impl)
+    metadata = {
+        "go_execution": "local" if uses_local_go else "docker-fallback",
+        "docker_image": None if uses_local_go else go_image,
+        "go_version": result["output"].strip().splitlines()[-1] if result["output"].strip() else "",
+    }
+    if result["code"] != 0:
+        metadata["go_version_error"] = result["output"]
+    return metadata
+
 def compose_cmd(compose_file, args):
     return ["docker", "compose", "-f", str(compose_file), *args]
 
@@ -130,7 +142,7 @@ def main():
     ap.add_argument("--generic-receipt", required=True)
     ap.add_argument("--output", required=True)
     ap.add_argument("--endpoint", default="http://localhost:8080/transactions")
-    ap.add_argument("--go-image", default=os.environ.get("GO_IMAGE", "golang:1.26"))
+    ap.add_argument("--go-image", default=os.environ.get("GO_IMAGE", "golang@sha256:3aff6657219a4d9c14e27fb1d8976c49c29fddb70ba835014f477e1c70636647"))
     args = ap.parse_args()
 
     root = Path(__file__).resolve().parents[1]
@@ -141,6 +153,7 @@ def main():
 
     generic = load_json(args.generic_receipt)
     rows = list(generic.get("rows", []))
+    go_metadata = go_execution_metadata(impl, args.go_image)
 
     body_a = (root / "targets/ledger-query/request.json").read_bytes()
     body_b = (root / "targets/ledger-query/request-b.json").read_bytes()
@@ -196,6 +209,7 @@ def main():
             "transport": "http",
             "database": "postgres",
             "cache": "redis",
+            **go_metadata,
         },
         "observations": {
             "before": before,
