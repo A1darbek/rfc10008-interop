@@ -1,0 +1,198 @@
+{
+  "environment": {
+    "node": "SANITIZED_NODE_20_PLUS",
+    "platform": "SANITIZED",
+    "transport": "http"
+  },
+  "generated_at": "SANITIZED_EXAMPLE",
+  "observations": {
+    "conditional_wire_status": 304,
+    "get_fallback_methods": [
+      "QUERY",
+      "POST",
+      "GET"
+    ],
+    "native_request_methods": [
+      "QUERY"
+    ],
+    "post_fallback_methods": [
+      "QUERY",
+      "POST"
+    ]
+  },
+  "rows": [
+    {
+      "evidence": {
+        "observed_request_methods": [
+          "QUERY"
+        ],
+        "wire_status": 200
+      },
+      "id": "kevincii.native_query_first",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "body_equal": true,
+        "body_non_empty": true,
+        "content_type": "application/json"
+      },
+      "id": "kevincii.json_request_preserved",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "parsed_as_json_object": true,
+        "response_has_rows": true,
+        "response_row_count": 2
+      },
+      "id": "kevincii.json_response_parsed",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "accept_query": "application/json",
+        "observation_layer": "after-response middleware"
+      },
+      "id": "kevincii.accept_query_observed",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "etag": "\"ayder-query-sha256-72615346e1d188434f2c43beb2f0a73c2dd4de93a5d013806d36d1714e6d9c8a\"",
+        "observation_layer": "after-response middleware"
+      },
+      "id": "kevincii.etag_observed",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "etag_replayed_exactly": true,
+        "wire_status": 304
+      },
+      "id": "kevincii.conditional_304_wire",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "error_status": 304,
+        "http_error": true,
+        "public_surface": "HttpError",
+        "wire_status": 304
+      },
+      "id": "kevincii.conditional_304_api_surface",
+      "result": "OBSERVED"
+    },
+    {
+      "evidence": {
+        "observed_request_methods": [
+          "QUERY",
+          "POST"
+        ]
+      },
+      "id": "kevincii.query_to_post_fallback",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "body_equal": true,
+        "body_non_empty": true
+      },
+      "id": "kevincii.post_body_preserved",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "observed_request_methods": [
+          "QUERY",
+          "POST",
+          "GET"
+        ]
+      },
+      "id": "kevincii.query_to_post_to_get_fallback",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "get_url": "/search?stream=events&limit=10&filter[active]=true&tags=priority&tags=audit",
+        "parsed_query": {
+          "filter[active]": [
+            "true"
+          ],
+          "limit": [
+            "10"
+          ],
+          "stream": [
+            "events"
+          ],
+          "tags": [
+            "priority",
+            "audit"
+          ]
+        }
+      },
+      "id": "kevincii.get_params_serialized",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "completed_before_one_second": true,
+        "configured_timeout_ms": 50,
+        "error_name": "TimeoutError",
+        "request_methods": [
+          "QUERY",
+          "QUERY"
+        ],
+        "server_delay_ms": 2000,
+        "typed_timeout_error": true
+      },
+      "id": "kevincii.timeout_enforced",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "abort_after_ms": 50,
+        "completed_before_one_second": true,
+        "request_methods": [
+          "QUERY"
+        ],
+        "signal_aborted": true
+      },
+      "id": "kevincii.external_abort_enforced",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "constructor": "DOMException",
+        "name": "AbortError"
+      },
+      "id": "kevincii.abort_error_surface",
+      "result": "OBSERVED"
+    }
+  ],
+  "run_id": "SANITIZED-kevincii-http-query-client",
+  "runner": {
+    "commit": "SANITIZED_RUNNER_COMMIT",
+    "repository": "A1darbek/rfc10008-interop"
+  },
+  "schema_version": "0.1",
+  "summary": {
+    "fail": 0,
+    "not_applicable": 0,
+    "not_supported": 0,
+    "observed": 2,
+    "pass": 12,
+    "unverified": 0
+  },
+  "target": {
+    "ayder": {
+      "implementation_commit": "2ddb6e346194c445445b04a4ffa5d1f9f700eaf2",
+      "implementation_url": "https://github.com/A1darbek/ayder"
+    },
+    "endpoint": "http://127.0.0.1:18109/broker/query",
+    "id": "kevincii-http-query-client",
+    "implementation_commit": "7fb3f7c4ff8b66a5bfd6678006e198ba3d18e647",
+    "implementation_url": "https://github.com/Kevinci/http-query",
+    "name": "@kevincii/http-query-client"
+  }
+}

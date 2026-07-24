@@ -1,0 +1,23 @@
+{
+  "name": "kevincii-http-query-client-interop-fixtures",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "native": "tsx ayder-client.ts",
+    "fallback": "tsx fallback-harness.ts",
+    "timeout": "tsx timeout-harness.ts"
+  },
+  "dependencies": {
+    "@kevincii/http-query-client": "0.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.4.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
