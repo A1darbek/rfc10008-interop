@@ -1,0 +1,37 @@
+============================================================
+ KEVINCII HTTP QUERY CLIENT INTEROP RECEIPT
+============================================================
+ implementation : 7fb3f7c4ff8b66a5bfd6678006e198ba3d18e647
+ ayder          : 2ddb6e346194c445445b04a4ffa5d1f9f700eaf2
+ endpoint       : http://127.0.0.1:18109/broker/query
+ summary        : PASS=12 FAIL=0 OBSERVED=2 UNVERIFIED=0 NOT_SUPPORTED=0 NOT_APPLICABLE=0
+------------------------------------------------------------
+ PASS            kevincii.native_query_first
+   evidence={"observed_request_methods": ["QUERY"], "wire_status": 200}
+ PASS            kevincii.json_request_preserved
+   evidence={"body_equal": true, "body_non_empty": true, "content_type": "application/json"}
+ PASS            kevincii.json_response_parsed
+   evidence={"parsed_as_json_object": true, "response_has_rows": true, "response_row_count": 2}
+ PASS            kevincii.accept_query_observed
+   evidence={"accept_query": "application/json", "observation_layer": "after-response middleware"}
+ PASS            kevincii.etag_observed
+   evidence={"etag": "\"ayder-query-sha256-72615346e1d188434f2c43beb2f0a73c2dd4de93a5d013806d36d1714e6d9c8a\"", "observation_layer": "after-response middleware"}
+ PASS            kevincii.conditional_304_wire
+   evidence={"etag_replayed_exactly": true, "wire_status": 304}
+ OBSERVED        kevincii.conditional_304_api_surface
+   evidence={"error_status": 304, "http_error": true, "public_surface": "HttpError", "wire_status": 304}
+ PASS            kevincii.query_to_post_fallback
+   evidence={"observed_request_methods": ["QUERY", "POST"]}
+ PASS            kevincii.post_body_preserved
+   evidence={"body_equal": true, "body_non_empty": true}
+ PASS            kevincii.query_to_post_to_get_fallback
+   evidence={"observed_request_methods": ["QUERY", "POST", "GET"]}
+ PASS            kevincii.get_params_serialized
+   evidence={"get_url": "/search?stream=events&limit=10&filter[active]=true&tags=priority&tags=audit", "parsed_query": {"filter[active]": ["true"], "limit": ["10"], "stream": ["events"], "tags": ["priority", "audit"]}}
+ PASS            kevincii.timeout_enforced
+   evidence={"completed_before_one_second": true, "configured_timeout_ms": 50, "error_name": "TimeoutError", "request_methods": ["QUERY", "QUERY"], "server_delay_ms": 2000, "typed_timeout_error": true}
+ PASS            kevincii.external_abort_enforced
+   evidence={"abort_after_ms": 50, "completed_before_one_second": true, "request_methods": ["QUERY"], "signal_aborted": true}
+ OBSERVED        kevincii.abort_error_surface
+   evidence={"constructor": "DOMException", "name": "AbortError"}
+============================================================

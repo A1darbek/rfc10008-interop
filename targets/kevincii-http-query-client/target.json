@@ -1,0 +1,25 @@
+{
+  "schema_version": "0.2",
+  "id": "kevincii-http-query-client",
+  "name": "@kevincii/http-query-client",
+  "implementation_url": "https://github.com/Kevinci/http-query",
+  "implementation_commit": "7fb3f7c4ff8b66a5bfd6678006e198ba3d18e647",
+  "endpoint": "http://127.0.0.1:18109/broker/query",
+  "method": "QUERY",
+  "runtime": {
+    "node": ">=20"
+  },
+  "ayder": {
+    "implementation_url": "https://github.com/A1darbek/ayder",
+    "implementation_commit": "2ddb6e346194c445445b04a4ffa5d1f9f700eaf2"
+  },
+  "capabilities": {
+    "native_query": true,
+    "json_request_response": true,
+    "response_middleware": true,
+    "query_to_post_fallback": true,
+    "query_to_post_to_get_fallback": true,
+    "timeout": true,
+    "external_abort": true
+  }
+}
