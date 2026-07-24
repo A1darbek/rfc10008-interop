@@ -1,0 +1,366 @@
+{
+  "environment": {
+    "platform": "SANITIZED",
+    "transport": "http"
+  },
+  "generated_at": "SANITIZED_EXAMPLE",
+  "observations": {
+    "cache_sequence": [
+      {
+        "cache_key": "QUERY:/products/search:81c16898a8c8d3e4",
+        "label": "A1",
+        "request_body_sha256": "81c16898a8c8d3e4e1661bb0dc53afc04d8522ce897fa77442d23543872dcd21",
+        "response_body_sha256": "c5108f60f7262424b8dc339aa6c7c6801414084c99f44d2463be526fa33f3d06",
+        "status": 200,
+        "x_cache": "MISS"
+      },
+      {
+        "cache_key": "QUERY:/products/search:81c16898a8c8d3e4",
+        "label": "A2",
+        "request_body_sha256": "81c16898a8c8d3e4e1661bb0dc53afc04d8522ce897fa77442d23543872dcd21",
+        "response_body_sha256": "c5108f60f7262424b8dc339aa6c7c6801414084c99f44d2463be526fa33f3d06",
+        "status": 200,
+        "x_cache": "HIT"
+      },
+      {
+        "cache_key": "QUERY:/products/search:d443d87c5713ce24",
+        "label": "B1",
+        "request_body_sha256": "d443d87c5713ce246d2e590eef1c0256bd2bf9bccb9b26e69854a0190bbd5b5e",
+        "response_body_sha256": "f32d36c2e66193f92ea4687cc9732d79885f6222d073407d0e7b24551d8acd0e",
+        "status": 200,
+        "x_cache": "MISS"
+      },
+      {
+        "cache_key": "QUERY:/products/search:81c16898a8c8d3e4",
+        "label": "A3",
+        "request_body_sha256": "81c16898a8c8d3e4e1661bb0dc53afc04d8522ce897fa77442d23543872dcd21",
+        "response_body_sha256": "c5108f60f7262424b8dc339aa6c7c6801414084c99f44d2463be526fa33f3d06",
+        "status": 200,
+        "x_cache": "HIT"
+      },
+      {
+        "cache_key": "QUERY:/products/search:9efedad7a471cdd2",
+        "label": "A-equivalent",
+        "request_body_sha256": "9efedad7a471cdd239af8a43f52e18645051738861668c638013bb50f6997fba",
+        "response_body_sha256": "c5108f60f7262424b8dc339aa6c7c6801414084c99f44d2463be526fa33f3d06",
+        "status": 200,
+        "x_cache": "MISS"
+      }
+    ],
+    "error_statuses": {
+      "malformed_json": 422,
+      "missing_content_type": 400,
+      "unsupported_media_type": 415
+    }
+  },
+  "rows": [
+    {
+      "expected": 200,
+      "id": "core.native_query",
+      "observed": 200,
+      "result": "PASS"
+    },
+    {
+      "expected": 200,
+      "id": "core.json_content_accepted",
+      "observed": 200,
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "accept_query": "\"application/json\""
+      },
+      "expected": 415,
+      "id": "core.unsupported_content_type",
+      "observed": 415,
+      "result": "PASS"
+    },
+    {
+      "expected": 400,
+      "id": "core.missing_content_type",
+      "observed": 400,
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "accept_query": "\"application/json\""
+      },
+      "id": "core.accept_query_advertised",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "reason": "target does not declare a POST method override"
+      },
+      "id": "core.method_override",
+      "result": "NOT_SUPPORTED"
+    },
+    {
+      "evidence": {
+        "first_body_sha256": "c5108f60f7262424b8dc339aa6c7c6801414084c99f44d2463be526fa33f3d06",
+        "repeat_body_sha256": "c5108f60f7262424b8dc339aa6c7c6801414084c99f44d2463be526fa33f3d06",
+        "return_body_sha256": "c5108f60f7262424b8dc339aa6c7c6801414084c99f44d2463be526fa33f3d06"
+      },
+      "id": "core.identical_request_repeatability",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "reason": "pinned implementation does not emit ETag"
+      },
+      "id": "representation.etag_advertised",
+      "result": "NOT_SUPPORTED"
+    },
+    {
+      "evidence": {
+        "reason": "pinned implementation does not emit ETag"
+      },
+      "id": "representation.identical_request_stable_validator",
+      "result": "NOT_SUPPORTED"
+    },
+    {
+      "evidence": {
+        "reason": "pinned implementation does not expose conditional 304 behavior"
+      },
+      "id": "representation.conditional_revalidation",
+      "result": "NOT_SUPPORTED"
+    },
+    {
+      "evidence": {
+        "reason": "pinned implementation does not emit Content-Location"
+      },
+      "id": "representation.content_location",
+      "result": "NOT_SUPPORTED"
+    },
+    {
+      "evidence": {
+        "etag": null,
+        "strength": "none"
+      },
+      "id": "representation.etag_observed_strength",
+      "result": "OBSERVED"
+    },
+    {
+      "evidence": {
+        "body_sha256": "c5108f60f7262424b8dc339aa6c7c6801414084c99f44d2463be526fa33f3d06",
+        "etag": null
+      },
+      "id": "representation.identity_encoding_probe",
+      "observed": 200,
+      "result": "OBSERVED"
+    },
+    {
+      "evidence": {
+        "cache_key_equal": false,
+        "reason": "pinned implementation keys cache identity from raw body bytes",
+        "semantic_response_equal": true
+      },
+      "id": "semantic.equivalent_json_same_identity",
+      "result": "NOT_SUPPORTED"
+    },
+    {
+      "evidence": {
+        "cache_sequence": [
+          "MISS",
+          "HIT",
+          "MISS",
+          "HIT",
+          "MISS"
+        ],
+        "fresh_server_process": true
+      },
+      "id": "safety.no_unintended_side_effects",
+      "result": "OBSERVED"
+    },
+    {
+      "evidence": {
+        "observable_state": "X-Cache and X-Cache-Key",
+        "sequence": [
+          {
+            "cache_key": "QUERY:/products/search:81c16898a8c8d3e4",
+            "label": "A1",
+            "request_body_sha256": "81c16898a8c8d3e4e1661bb0dc53afc04d8522ce897fa77442d23543872dcd21",
+            "response_body_sha256": "c5108f60f7262424b8dc339aa6c7c6801414084c99f44d2463be526fa33f3d06",
+            "status": 200,
+            "x_cache": "MISS"
+          },
+          {
+            "cache_key": "QUERY:/products/search:81c16898a8c8d3e4",
+            "label": "A2",
+            "request_body_sha256": "81c16898a8c8d3e4e1661bb0dc53afc04d8522ce897fa77442d23543872dcd21",
+            "response_body_sha256": "c5108f60f7262424b8dc339aa6c7c6801414084c99f44d2463be526fa33f3d06",
+            "status": 200,
+            "x_cache": "HIT"
+          },
+          {
+            "cache_key": "QUERY:/products/search:d443d87c5713ce24",
+            "label": "B1",
+            "request_body_sha256": "d443d87c5713ce246d2e590eef1c0256bd2bf9bccb9b26e69854a0190bbd5b5e",
+            "response_body_sha256": "f32d36c2e66193f92ea4687cc9732d79885f6222d073407d0e7b24551d8acd0e",
+            "status": 200,
+            "x_cache": "MISS"
+          },
+          {
+            "cache_key": "QUERY:/products/search:81c16898a8c8d3e4",
+            "label": "A3",
+            "request_body_sha256": "81c16898a8c8d3e4e1661bb0dc53afc04d8522ce897fa77442d23543872dcd21",
+            "response_body_sha256": "c5108f60f7262424b8dc339aa6c7c6801414084c99f44d2463be526fa33f3d06",
+            "status": 200,
+            "x_cache": "HIT"
+          },
+          {
+            "cache_key": "QUERY:/products/search:9efedad7a471cdd2",
+            "label": "A-equivalent",
+            "request_body_sha256": "9efedad7a471cdd239af8a43f52e18645051738861668c638013bb50f6997fba",
+            "response_body_sha256": "c5108f60f7262424b8dc339aa6c7c6801414084c99f44d2463be526fa33f3d06",
+            "status": 200,
+            "x_cache": "MISS"
+          }
+        ]
+      },
+      "id": "safety.state_before_after_recorded",
+      "result": "OBSERVED"
+    },
+    {
+      "id": "ayder.no_committed_offset_advance",
+      "result": "NOT_APPLICABLE"
+    },
+    {
+      "id": "ayder.no_broker_state_mutation",
+      "result": "NOT_APPLICABLE"
+    },
+    {
+      "id": "ayder.bounded_snapshot_stability",
+      "result": "NOT_APPLICABLE"
+    },
+    {
+      "id": "ayder.rate_limit_headers_sane",
+      "result": "NOT_APPLICABLE"
+    },
+    {
+      "expected": 422,
+      "id": "oharu.malformed_json_rejected",
+      "observed": 422,
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "accept_query": "\"application/json\"",
+        "access_control_allow_headers": "Content-Type, Accept",
+        "access_control_allow_methods": "GET, POST, QUERY, OPTIONS",
+        "status": 200
+      },
+      "id": "oharu.options_query_cors",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "status": 200,
+        "x_cache": "MISS"
+      },
+      "id": "oharu.cache_first_body_miss",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "same_key": true,
+        "status": 200,
+        "x_cache": "HIT"
+      },
+      "id": "oharu.cache_identical_body_hit",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "distinct_key": true,
+        "result_differs": true,
+        "status": 200,
+        "x_cache": "MISS"
+      },
+      "id": "oharu.cache_different_body_miss",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "same_key": true,
+        "status": 200,
+        "x_cache": "HIT"
+      },
+      "id": "oharu.cache_return_to_first_body_hit",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "a1_response_sha256": "c5108f60f7262424b8dc339aa6c7c6801414084c99f44d2463be526fa33f3d06",
+        "a2_response_sha256": "c5108f60f7262424b8dc339aa6c7c6801414084c99f44d2463be526fa33f3d06",
+        "a3_response_sha256": "c5108f60f7262424b8dc339aa6c7c6801414084c99f44d2463be526fa33f3d06",
+        "non_empty": true
+      },
+      "id": "oharu.cache_exact_replay",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "a_key": "QUERY:/products/search:81c16898a8c8d3e4",
+        "a_return_key": "QUERY:/products/search:81c16898a8c8d3e4",
+        "a_returned_exactly": true,
+        "b_key": "QUERY:/products/search:d443d87c5713ce24"
+      },
+      "id": "oharu.cache_no_cross_body_collision",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "expected_keys_from_raw_body_sha256": {
+          "A-equivalent": "QUERY:/products/search:9efedad7a471cdd2",
+          "A1": "QUERY:/products/search:81c16898a8c8d3e4",
+          "A2": "QUERY:/products/search:81c16898a8c8d3e4",
+          "A3": "QUERY:/products/search:81c16898a8c8d3e4",
+          "B1": "QUERY:/products/search:d443d87c5713ce24"
+        },
+        "method_and_path_prefix": "QUERY:/products/search:",
+        "observed_keys": {
+          "A-equivalent": "QUERY:/products/search:9efedad7a471cdd2",
+          "A1": "QUERY:/products/search:81c16898a8c8d3e4",
+          "A2": "QUERY:/products/search:81c16898a8c8d3e4",
+          "A3": "QUERY:/products/search:81c16898a8c8d3e4",
+          "B1": "QUERY:/products/search:d443d87c5713ce24"
+        }
+      },
+      "id": "oharu.cache_key_includes_body",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "cache_key_differs": true,
+        "interpretation": "Cache identity follows raw request-body bytes.",
+        "raw_body_sha256_differs": true,
+        "semantic_response_equal": true,
+        "x_cache": "MISS"
+      },
+      "id": "oharu.reordered_json_cache_identity",
+      "result": "OBSERVED"
+    }
+  ],
+  "run_id": "SANITIZED-oharu-product-search",
+  "runner": {
+    "commit": "SANITIZED_RUNNER_COMMIT",
+    "repository": "A1darbek/rfc10008-interop"
+  },
+  "schema_version": "0.1",
+  "summary": {
+    "fail": 0,
+    "not_applicable": 4,
+    "not_supported": 6,
+    "observed": 5,
+    "pass": 15,
+    "unverified": 0
+  },
+  "target": {
+    "endpoint": "http://127.0.0.1:18082/products/search",
+    "id": "oharu-product-search",
+    "implementation_commit": "057d9effae1bc767eaef03fc6cdc1b774cd735ad",
+    "implementation_url": "https://github.com/oharu121/http-query-method-rfc10008-demo",
+    "name": "Oharu product-search QUERY server"
+  }
+}

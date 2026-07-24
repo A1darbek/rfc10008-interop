@@ -1,0 +1,7 @@
+{
+  "categories": ["phones"],
+  "price": {
+    "max": 1200
+  },
+  "in_stock": true
+}

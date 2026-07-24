@@ -1,0 +1,24 @@
+============================================================
+ OHARU PRODUCT-SEARCH CACHE RECEIPT
+============================================================
+ implementation : 057d9effae1bc767eaef03fc6cdc1b774cd735ad
+ endpoint       : http://127.0.0.1:18082/products/search
+ summary        : PASS=7 FAIL=0 OBSERVED=1 UNVERIFIED=0 NOT_SUPPORTED=0 NOT_APPLICABLE=0
+------------------------------------------------------------
+ PASS            oharu.cache_first_body_miss
+   evidence={"status": 200, "x_cache": "MISS"}
+ PASS            oharu.cache_identical_body_hit
+   evidence={"same_key": true, "status": 200, "x_cache": "HIT"}
+ PASS            oharu.cache_different_body_miss
+   evidence={"distinct_key": true, "result_differs": true, "status": 200, "x_cache": "MISS"}
+ PASS            oharu.cache_return_to_first_body_hit
+   evidence={"same_key": true, "status": 200, "x_cache": "HIT"}
+ PASS            oharu.cache_exact_replay
+   evidence={"a1_response_sha256": "c5108f60f7262424b8dc339aa6c7c6801414084c99f44d2463be526fa33f3d06", "a2_response_sha256": "c5108f60f7262424b8dc339aa6c7c6801414084c99f44d2463be526fa33f3d06", "a3_response_sha256": "c5108f60f7262424b8dc339aa6c7c6801414084c99f44d2463be526fa33f3d06", "non_empty": true}
+ PASS            oharu.cache_no_cross_body_collision
+   evidence={"a_key": "QUERY:/products/search:81c16898a8c8d3e4", "a_return_key": "QUERY:/products/search:81c16898a8c8d3e4", "a_returned_exactly": true, "b_key": "QUERY:/products/search:d443d87c5713ce24"}
+ PASS            oharu.cache_key_includes_body
+   evidence={"expected_keys_from_raw_body_sha256": {"A-equivalent": "QUERY:/products/search:9efedad7a471cdd2", "A1": "QUERY:/products/search:81c16898a8c8d3e4", "A2": "QUERY:/products/search:81c16898a8c8d3e4", "A3": "QUERY:/products/search:81c16898a8c8d3e4", "B1": "QUERY:/products/search:d443d87c5713ce24"}, "method_and_path_prefix": "QUERY:/products/search:", "observed_keys": {"A-equivalent": "QUERY:/products/search:9efedad7a471cdd2", "A1": "QUERY:/products/search:81c16898a8c8d3e4", "A2": "QUERY:/products/search:81c16898a8c8d3e4", "A3": "QUERY:/products/search:81c16898a8c8d3e4", "B1": "QUERY:/products/search:d443d87c5713ce24"}}
+ OBSERVED        oharu.reordered_json_cache_identity
+   evidence={"cache_key_differs": true, "interpretation": "Cache identity follows raw request-body bytes.", "raw_body_sha256_differs": true, "semantic_response_equal": true, "x_cache": "MISS"}
+============================================================
