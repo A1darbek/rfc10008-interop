@@ -1,0 +1,8 @@
+{
+  "categories": ["laptops"],
+  "price": {
+    "min": 500,
+    "max": 2000
+  },
+  "in_stock": true
+}

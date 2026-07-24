@@ -1,0 +1,33 @@
+{
+  "schema_version": "0.2",
+  "id": "oharu-product-search",
+  "name": "Oharu product-search QUERY server",
+  "implementation_url": "https://github.com/oharu121/http-query-method-rfc10008-demo",
+  "implementation_commit": "057d9effae1bc767eaef03fc6cdc1b774cd735ad",
+  "endpoint": "http://127.0.0.1:18082/products/search",
+  "method": "QUERY",
+  "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  },
+  "request_body_file": "targets/oharu-product-search/request-a.json",
+  "equivalent_request_body_file": "targets/oharu-product-search/request-a-equivalent.json",
+  "capabilities": {
+    "accept_query": true,
+    "etag": false,
+    "conditional_revalidation": false,
+    "content_location": false,
+    "semantic_query_identity": false,
+    "method_override": false,
+    "cors_preflight": true,
+    "cache_observability": true,
+    "implementation_safety_receipt": false
+  },
+  "expectations": {
+    "native_query_status": 200,
+    "supported_content_type_status": 200,
+    "unsupported_content_type_status": 415,
+    "missing_content_type_status": 400,
+    "malformed_json_status": 422
+  }
+}
