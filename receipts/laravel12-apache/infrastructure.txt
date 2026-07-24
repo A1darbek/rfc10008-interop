@@ -1,0 +1,23 @@
+============================================================
+ LARAVEL 12 APACHE QUERY INFRASTRUCTURE RECEIPT
+============================================================
+ endpoint : http://localhost:8080/mock/orders
+ summary  : PASS=3 FAIL=0 OBSERVED=2 UNVERIFIED=1 NOT_SUPPORTED=0 NOT_APPLICABLE=2
+------------------------------------------------------------
+ PASS            laravel12.apache_query_reaches_application
+   evidence={"status": 200, "verb_received": "QUERY"}
+ PASS            laravel12.json_body_preserved
+   evidence={"filter_applied": "shipped", "result_statuses": ["shipped"]}
+ PASS            laravel12.generic_route_dispatch
+   evidence={"status": 200}
+ NOT_APPLICABLE  laravel12.native_route_helper
+   evidence={"reason": "Laravel 12 target registers QUERY directly on the underlying router"}
+ NOT_APPLICABLE  laravel12.native_http_client_helper
+   evidence={"reason": "Laravel 12 target uses generic Http::send(\"QUERY\") path"}
+ OBSERVED        laravel12.cors_preflight_allows_query
+   evidence={"access_control_allow_methods": "", "status": 200}
+ OBSERVED        laravel12.php_runtime_observed
+   evidence={"known_future_cli_support": {"php_src_pr": 22615, "php_version": "8.6"}, "request_path": "Apache mod_php", "runtime": "PHP 8.2.32 (cli) (built: Jul 14 2026 01:36:12) (NTS)"}
+ UNVERIFIED      laravel12.php_cli_server_behavior
+   evidence={"reason": "PHP built-in development server is not executed by this Apache target"}
+============================================================
