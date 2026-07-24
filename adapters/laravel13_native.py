@@ -5,6 +5,7 @@ import hashlib
 import http.client
 import json
 import platform
+import re
 import subprocess
 import urllib.parse
 from pathlib import Path
@@ -71,7 +72,7 @@ def main():
     ap.add_argument("--implementation-dir", required=True)
     ap.add_argument("--generic-receipt", required=True)
     ap.add_argument("--output", required=True)
-    ap.add_argument("--endpoint", default="http://localhost:8080/mock/orders")
+    ap.add_argument("--endpoint", default="http://localhost:18081/mock/orders")
     args = ap.parse_args()
 
     impl = Path(args.implementation_dir).resolve()
@@ -91,7 +92,22 @@ def main():
 
     routes = (impl / "routes/web.php").read_text(encoding="utf-8")
     controller = (impl / "app/Http/Controllers/HttpQueryDemoController.php").read_text(encoding="utf-8")
+    readme = (impl / "README.md").read_text(encoding="utf-8")
     tests = "\n".join(p.read_text(encoding="utf-8") for p in (impl / "tests").glob("**/*.php"))
+
+    native_route_registration = (
+        "app('router')->addRoute(['QUERY']" in routes
+        or 'app("router")->addRoute(["QUERY"]' in routes
+    )
+    plain_http_query_calls = len(
+        re.findall(r"^\s*\$response\s*=\s*Http::query\(", controller, re.MULTILINE)
+    )
+    as_json_query_calls = len(
+        re.findall(r"^\s*\$response\s*=\s*Http::asJson\(\)->query\(", controller, re.MULTILINE)
+    )
+    as_form_query_calls = len(
+        re.findall(r"^\s*\$response\s*=\s*Http::asForm\(\)->query\(", controller, re.MULTILINE)
+    )
 
     php_version = subprocess.run(
         ["docker", "compose", "-f", str(impl / "docker-compose.yml"), "exec", "-T", "app", "php", "-v"],
@@ -105,8 +121,57 @@ def main():
         row("laravel13.query_reaches_application", passfail(parsed.get("verb_received") == "QUERY"), evidence={"verb_received": parsed.get("verb_received")}),
         row("laravel13.request_all_parses_query_body", passfail(parsed.get("filter_applied") == "shipped" and len(parsed.get("results", [])) == 2), evidence={"filter_applied": parsed.get("filter_applied"), "result_count": len(parsed.get("results", []))}),
         row("laravel13.safe_idempotent_cacheable_flags", passfail(parsed.get("safe") is True and parsed.get("idempotent") is True and parsed.get("cacheable") is True), evidence={"safe": parsed.get("safe"), "idempotent": parsed.get("idempotent"), "cacheable": parsed.get("cacheable")}),
-        row("laravel13.native_http_query_client_source", passfail("->query(" in controller or "::query(" in controller), evidence={"source": "HttpQueryDemoController.php"}),
-        row("laravel13.native_route_query_helper", "NOT_SUPPORTED", evidence={"reason": "pinned branch uses app('router')->addRoute(['QUERY'], ...); README says Route::query() helper is not present"}),
+        row(
+            "laravel13.native_route_registration",
+            passfail(native_route_registration),
+            evidence={
+                "registration": "app('router')->addRoute(['QUERY'], ...)",
+                "route_query_helper_required": False,
+            },
+        ),
+        row(
+            "laravel13.native_route_query_helper",
+            "NOT_SUPPORTED",
+            evidence={
+                "reason": (
+                    "No Route::query() convenience helper exists in the released "
+                    "Laravel version represented by this target. Direct router "
+                    "registration is the supported native approach."
+                )
+            },
+        ),
+        row(
+            "laravel13.native_http_query_client_source",
+            passfail(plain_http_query_calls > 0),
+            evidence={
+                "plain_http_query_calls": plain_http_query_calls,
+                "source": "HttpQueryDemoController.php",
+            },
+        ),
+        row(
+            "laravel13.http_query_json_default_usage",
+            passfail(
+                plain_http_query_calls > 0
+                and as_json_query_calls == 0
+                and as_form_query_calls == 0
+            ),
+            evidence={
+                "plain_http_query_calls": plain_http_query_calls,
+                "as_json_query_calls": as_json_query_calls,
+                "as_form_query_calls": as_form_query_calls,
+                "interpretation": (
+                    "Executable outbound examples use Http::query() directly; "
+                    "JSON is the default representation."
+                ),
+            },
+        ),
+        row(
+            "laravel13.form_query_alternative_documented",
+            "OBSERVED",
+            evidence={
+                "as_form_alternative_documented": "Http::asForm()->query(" in readme,
+            },
+        ),
         row("laravel13.native_query_json_helper", "NOT_SUPPORTED", evidence={"reason": "no queryJson helper usage found in pinned branch", "query_json_found": "queryJson" in tests}),
         row("laravel13.cors_preflight_observed", "OBSERVED", observed=preflight["status"], evidence={"allow_methods": preflight["headers"].get("access-control-allow-methods"), "allow_headers": preflight["headers"].get("access-control-allow-headers")}),
         row("laravel13.php_cli_server_behavior", "OBSERVED", evidence={"php_version_first_line": php_version.stdout.splitlines()[0] if php_version.stdout else "unknown", "note": "Apache target verified; PHP CLI server was not started by this adapter"}),
@@ -122,7 +187,7 @@ def main():
             "id": "laravel13-query-comparison",
             "name": "Laravel 13 QUERY comparison",
             "implementation_url": "https://github.com/phoenix1331/laravel-http-query-demo",
-            "implementation_commit": "af19ed98eb77b62f5156ce285dc2ea135788519a",
+            "implementation_commit": "6dad5145eececc7c137b89c9cd4cce56fa83a8b5",
             "endpoint": args.endpoint,
         },
         "environment": {

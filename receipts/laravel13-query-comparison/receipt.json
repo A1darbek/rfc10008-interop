@@ -1,10 +1,10 @@
 {
   "environment": {
-    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-aarch64-with-glibc2.42",
+    "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
     "server": "apache",
     "transport": "http"
   },
-  "generated_at": "2026-07-20T21:55:56Z",
+  "generated_at": "2026-07-24T21:17:53Z",
   "observations": {
     "preflight_status": 200,
     "query_body_sha256": "74e2de3e4f45f324649f08686d3a24555cc2cb3752a3aecf29d711f4889859cc",
@@ -188,6 +188,22 @@
     },
     {
       "evidence": {
+        "registration": "app('router')->addRoute(['QUERY'], ...)",
+        "route_query_helper_required": false
+      },
+      "id": "laravel13.native_route_registration",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "reason": "No Route::query() convenience helper exists in the released Laravel version represented by this target. Direct router registration is the supported native approach."
+      },
+      "id": "laravel13.native_route_query_helper",
+      "result": "NOT_SUPPORTED"
+    },
+    {
+      "evidence": {
+        "plain_http_query_calls": 2,
         "source": "HttpQueryDemoController.php"
       },
       "id": "laravel13.native_http_query_client_source",
@@ -195,10 +211,20 @@
     },
     {
       "evidence": {
-        "reason": "pinned branch uses app('router')->addRoute(['QUERY'], ...); README says Route::query() helper is not present"
+        "as_form_query_calls": 0,
+        "as_json_query_calls": 0,
+        "interpretation": "Executable outbound examples use Http::query() directly; JSON is the default representation.",
+        "plain_http_query_calls": 2
       },
-      "id": "laravel13.native_route_query_helper",
-      "result": "NOT_SUPPORTED"
+      "id": "laravel13.http_query_json_default_usage",
+      "result": "PASS"
+    },
+    {
+      "evidence": {
+        "as_form_alternative_documented": true
+      },
+      "id": "laravel13.form_query_alternative_documented",
+      "result": "OBSERVED"
     },
     {
       "evidence": {
@@ -226,9 +252,9 @@
       "result": "OBSERVED"
     }
   ],
-  "run_id": "20260720T215556Z-laravel13-query-comparison",
+  "run_id": "20260724T211753Z-laravel13-query-comparison",
   "runner": {
-    "commit": "15a315f62576d567a7618e7c1fce88259864c4e5",
+    "commit": "26029e0b38c5ba1b01947ee434a6a4ea37134987",
     "repository": "A1darbek/rfc10008-interop"
   },
   "schema_version": "0.1",
@@ -236,14 +262,14 @@
     "fail": 0,
     "not_applicable": 4,
     "not_supported": 9,
-    "observed": 8,
-    "pass": 8,
+    "observed": 9,
+    "pass": 10,
     "unverified": 0
   },
   "target": {
-    "endpoint": "http://localhost:8080/mock/orders",
+    "endpoint": "http://localhost:18081/mock/orders",
     "id": "laravel13-query-comparison",
-    "implementation_commit": "af19ed98eb77b62f5156ce285dc2ea135788519a",
+    "implementation_commit": "6dad5145eececc7c137b89c9cd4cce56fa83a8b5",
     "implementation_url": "https://github.com/phoenix1331/laravel-http-query-demo",
     "name": "Laravel 13 QUERY comparison"
   }

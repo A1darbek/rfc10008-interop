@@ -3,8 +3,8 @@
   "id": "laravel13-query-comparison",
   "name": "Laravel 13 QUERY comparison",
   "implementation_url": "https://github.com/phoenix1331/laravel-http-query-demo",
-  "implementation_commit": "af19ed98eb77b62f5156ce285dc2ea135788519a",
-  "endpoint": "http://localhost:8080/mock/orders",
+  "implementation_commit": "6dad5145eececc7c137b89c9cd4cce56fa83a8b5",
+  "endpoint": "http://localhost:18081/mock/orders",
   "method": "QUERY",
   "headers": {
     "Content-Type": "application/json",

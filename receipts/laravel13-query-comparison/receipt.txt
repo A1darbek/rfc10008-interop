@@ -2,10 +2,10 @@
  LARAVEL 13 QUERY INTEROP RECEIPT
 ============================================================
  target       : laravel13-query-comparison
- endpoint     : http://localhost:8080/mock/orders
- generated_at : 2026-07-20T21:55:56Z
+ endpoint     : http://localhost:18081/mock/orders
+ generated_at : 2026-07-24T21:17:53Z
 ------------------------------------------------------------
- summary      : PASS=8 FAIL=0 OBSERVED=8 UNVERIFIED=0 NOT_SUPPORTED=9 NOT_APPLICABLE=4
+ summary      : PASS=10 FAIL=0 OBSERVED=9 UNVERIFIED=0 NOT_SUPPORTED=9 NOT_APPLICABLE=4
 ------------------------------------------------------------
  PASS            core.native_query
    expected=200 observed=200
@@ -54,10 +54,16 @@
    evidence={"filter_applied": "shipped", "result_count": 2}
  PASS            laravel13.safe_idempotent_cacheable_flags
    evidence={"cacheable": true, "idempotent": true, "safe": true}
- PASS            laravel13.native_http_query_client_source
-   evidence={"source": "HttpQueryDemoController.php"}
+ PASS            laravel13.native_route_registration
+   evidence={"registration": "app('router')->addRoute(['QUERY'], ...)", "route_query_helper_required": false}
  NOT_SUPPORTED   laravel13.native_route_query_helper
-   evidence={"reason": "pinned branch uses app('router')->addRoute(['QUERY'], ...); README says Route::query() helper is not present"}
+   evidence={"reason": "No Route::query() convenience helper exists in the released Laravel version represented by this target. Direct router registration is the supported native approach."}
+ PASS            laravel13.native_http_query_client_source
+   evidence={"plain_http_query_calls": 2, "source": "HttpQueryDemoController.php"}
+ PASS            laravel13.http_query_json_default_usage
+   evidence={"as_form_query_calls": 0, "as_json_query_calls": 0, "interpretation": "Executable outbound examples use Http::query() directly; JSON is the default representation.", "plain_http_query_calls": 2}
+ OBSERVED        laravel13.form_query_alternative_documented
+   evidence={"as_form_alternative_documented": true}
  NOT_SUPPORTED   laravel13.native_query_json_helper
    evidence={"query_json_found": false, "reason": "no queryJson helper usage found in pinned branch"}
  OBSERVED        laravel13.cors_preflight_observed
